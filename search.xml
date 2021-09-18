@@ -6,6 +6,8 @@
     <content><![CDATA[<h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
 <p><strong>加粗</strong> Ctrl+B</p>
 <p><em>斜体</em> Ctrl+I</p>
+<span id="more"></span> 
+
 <p><u>下划线</u> Ctrl+U</p>
 <p><del>删除线</del> Alt+Shift+5</p>
 <p><code>代码片段</code> Ctrl+Shift+`</p>
@@ -47,9 +49,12 @@
     <content><![CDATA[<h1 id="C语言大概用的上的数据类型和修饰符等整理"><a href="#C语言大概用的上的数据类型和修饰符等整理" class="headerlink" title="C语言大概用的上的数据类型和修饰符等整理"></a>C语言大概用的上的数据类型和修饰符等整理</h1><p>数据类型</p>
 <p><strong>byte</strong></p>
 <ul>
-<li>8位、有符号的以二进制补码表示的整数</li>
-<li>min :  -128（-2^7）</li>
-<li>max:  127(2^7-1)</li>
+<li><p>8位、有符号的以二进制补码表示的整数</p>
+</li>
+<li><p>min :  -128（-2^7）</p>
+</li>
+<li><p>max:  127(2^7-1)</p>
+<span id="more"></span> </li>
 </ul>
 <p><strong>short</strong></p>
 <ul>

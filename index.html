@@ -98,47 +98,20 @@
         
       
       
-      <h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
+        <h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
 <p><strong>加粗</strong> Ctrl+B</p>
 <p><em>斜体</em> Ctrl+I</p>
-<p><u>下划线</u> Ctrl+U</p>
-<p><del>删除线</del> Alt+Shift+5</p>
-<p><code>代码片段</code> Ctrl+Shift+`</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码块 Ctrl+Shift+K</span><br></pre></td></tr></table></figure>
-
-<p>跳出代码块 Ctrl+Enter</p>
-<p><a target="_blank" rel="noopener" href="https://stttrl.github.io/">链接</a> Ctrl+K（先复制链接，然后选中要加链接的文本，按快捷键。Ctrl+左键点击文本可跳转到对应链接）(这里的链接直接返回首页)</p>
-<p>取消格式 再次按相同的快捷键</p>
-<p>有序列表 数字+点+空格 </p>
-<ol>
-<li>a</li>
-<li></li>
-</ol>
-<p> 无序列表 减号+空格</p>
-<ul>
-<li>a</li>
-<li></li>
-</ul>
-<p>任务列表 加号或减号+空格</p>
-<p>切换到列表下一行 Space+Enter</p>
-<p>嵌套列表 按Tab键</p>
-<p>退出列表 按 Shift+Tab</p>
-<table>
-<thead>
-<tr>
-<th>插入表格</th>
-<th>Ctrl+T</th>
-</tr>
-</thead>
-</table>
-<blockquote>
-<p>引用 Ctrl+Shift+Q</p>
-</blockquote>
-
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="cktpdp2qo00033gw1bigq1yif" class="article-share-link">
+      <a data-url="http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="cktpxbnu000034kw1e2hbf55k" class="article-share-link">
         分享
       </a>
       
@@ -186,121 +159,25 @@
         
       
       
-      <h1 id="C语言大概用的上的数据类型和修饰符等整理"><a href="#C语言大概用的上的数据类型和修饰符等整理" class="headerlink" title="C语言大概用的上的数据类型和修饰符等整理"></a>C语言大概用的上的数据类型和修饰符等整理</h1><p>数据类型</p>
+        <h1 id="C语言大概用的上的数据类型和修饰符等整理"><a href="#C语言大概用的上的数据类型和修饰符等整理" class="headerlink" title="C语言大概用的上的数据类型和修饰符等整理"></a>C语言大概用的上的数据类型和修饰符等整理</h1><p>数据类型</p>
 <p><strong>byte</strong></p>
 <ul>
-<li>8位、有符号的以二进制补码表示的整数</li>
-<li>min :  -128（-2^7）</li>
-<li>max:  127(2^7-1)</li>
-</ul>
-<p><strong>short</strong></p>
-<ul>
-<li>16位、有符号的以二进制补码表示的整数</li>
-<li>min :  -32768（-2^15）</li>
-<li>max:  32767（2^15 - 1）</li>
-</ul>
-<p><strong>int</strong></p>
-<ul>
-<li>32位、有符号的以二进制补码表示的整数</li>
-<li>min :  -2,147,483,648（-2^31）</li>
-<li>max:  2,147,483,647（2^31 - 1）</li>
-</ul>
-<p><strong>long</strong></p>
-<ul>
-<li>64位、有符号的以二进制补码表示的整数</li>
-<li>min :  -9,223,372,036,854,775,808（-2^63）</li>
-<li>max:  9,223,372,036,854,775,807（2^63 -1）</li>
-</ul>
-<p><strong>float</strong></p>
-<ul>
-<li>单精度、32位、符合IEEE 754标准的浮点数</li>
-<li>float 在储存大型浮点数组的时候可节省内存空间</li>
-<li>浮点数不能用来表示精确的值，如货币</li>
-</ul>
-<p><strong>double</strong></p>
-<ul>
-<li>双精度、64位、符合IEEE 754标准的浮点数</li>
-<li>浮点数的默认类型为double类型</li>
-<li>double类型同样不能表示精确的值，如货币</li>
-</ul>
-<p><strong>char</strong></p>
-<ul>
-<li>char类型是一个单一的 16 位 Unicode 字符</li>
-<li>最小值是 0</li>
-<li>最大值是 65535</li>
-<li>char 数据类型可以储存任何字符</li>
-</ul>
-<p>**<em>*boolean*</em><br>**</p>
-<ul>
-<li>boolean数据类型表示一位的信息</li>
-<li>只有两个取值：true 和 false</li>
-<li>这种类型只作为一种标志来记录 true/false 情况</li>
-</ul>
-<p><strong>prinft和scanf很像，但是修饰符有不一样的地方，所以试着整理</strong></p>
-<p>printf()相关 </p>
-<p>转化说明</p>
-<ul>
-<li><p>%a    浮点数、十六进制数和p计数法</p>
+<li><p>8位、有符号的以二进制补码表示的整数</p>
 </li>
-<li><p>%c    单个字符</p>
+<li><p>min :  -128（-2^7）</p>
 </li>
-<li><p>%d    有符号十进制整数</p>
-</li>
-<li><p>%e    浮点数、e计数法（小数点左侧一个数字，右侧六个小数）</p>
-</li>
-<li><p>%f    浮点数，十进制计数法（默认6位小数）</p>
-</li>
-<li><p>%g    根据值的不同自动选择%f或%e。%e用于指数小于-4或者大于等于精度时。</p>
-</li>
-<li><p>%i    有符号十进制整数（与%d相同）</p>
-</li>
-<li><p>%o    无符号八进制整数</p>
-</li>
-<li><p>%p    指针</p>
-</li>
-<li><p>%s    字符串</p>
-</li>
-<li><p>%u    无符号十进制整数</p>
-</li>
-<li><p>%x    无符号十六进制整数，使用十六进制数0f</p>
-</li>
-<li><p>%%    打印一个%</p>
-</li>
-</ul>
-<p>修饰符</p>
-<ul>
-<li>​    -减号       会把项目打印在字段的左侧开始处。例如：“-20s”</li>
-<li>​    +加号      使值带正负号</li>
-<li>​    空格         正为前导空格，负为-</li>
-<li>​    #井号      使用转换说明的对应可选形式</li>
-<li>​     0             使用前导0占据字符宽度空格</li>
-<li>​     数字           字段宽度最小值</li>
-<li>​     h             和整数转换说明一起使用 表short int</li>
-<li>​     hh            同上，但是表short char</li>
-<li>​     l                表long int </li>
-<li>​     ll              表longl long int</li>
-</ul>
-<hr>
-<p>scanf()相关 </p>
-<p>转化说明</p>
-<ul>
-<li>%c 把输入视为字符</li>
-<li>%d 把输入视为10进制整数</li>
-<li>%e %f %g 把输入视为浮点数</li>
-<li>%i 把输入视为带符号的10进制整数</li>
-<li>%o 把输入视为带符号的8进制整数</li>
-<li>%x 把输入视为带符号的16进制整数</li>
-<li>%u 把输入视为无符号10进制整数</li>
-<li>%p 把输入视为指针</li>
-</ul>
-<p>修饰符</p>
-<p>​    *                跳过赋值</p>
-<p>数字              读取的最大宽度 如%10d 读到第10位或是空白时停止</p>
-
+<li><p>max:  127(2^7-1)</p>
+        
+          <p>
+            <a class="article-more-link" href="/2021/09/17/c%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%83%BD%E7%9B%AE%E5%89%8D%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%AD%89/">
+              Read More...
+            </a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/09/17/c%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%83%BD%E7%9B%AE%E5%89%8D%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%AD%89/" data-id="cktpdp2qd00003gw159rc9dx1" class="article-share-link">
+      <a data-url="http://example.com/2021/09/17/c%E8%AF%AD%E8%A8%80%E5%8F%AF%E8%83%BD%E7%9B%AE%E5%89%8D%E5%B8%B8%E7%94%A8%E5%88%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%AD%89/" data-id="cktpxbntq00004kw13df98xo6" class="article-share-link">
         分享
       </a>
       
