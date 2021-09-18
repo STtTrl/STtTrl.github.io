@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>c</title>
-    <url>/2021/09/18/c/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E6%96%87%E7%AB%A0/</url>
+    <title>尝试编写博客文章</title>
+    <url>/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
     <content><![CDATA[<h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
 <p><strong>加粗</strong> Ctrl+B</p>
 <p><em>斜体</em> Ctrl+I</p>
@@ -45,5 +40,10 @@
 <p>引用 Ctrl+Shift+Q</p>
 </blockquote>
 ]]></content>
+  </entry>
+  <entry>
+    <title>c</title>
+    <url>/2021/09/18/c/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
