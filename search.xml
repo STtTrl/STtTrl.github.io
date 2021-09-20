@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>10分钟学点整理点sql常用指令</title>
+    <url>/2021/09/21/10%E5%88%86%E9%92%9F%E5%AD%A6%E7%82%B9%E6%95%B4%E7%90%86%E7%82%B9sql%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="sql常用基础指令"><a href="#sql常用基础指令" class="headerlink" title="sql常用基础指令"></a>sql常用基础指令</h1><p>随便记记，意会就行，我自己看得懂就行</p>
+<span id="more"></span> 
+<ul>
+<li>增:insert</li>
+<li>删:delete</li>
+<li>改:update</li>
+<li>查:select或者show</li>
+<li>alter table 表名 rename to 新表名；改表名</li>
+<li>rename table 表名 to 新名；还是改表名</li>
+<li>alter table 表名 add 字段名 字段类型 添加多个要加括号，每个字段之间逗号隔开</li>
+<li>alter table 表名 change 旧字段名 新字段名 字段类型 改</li>
+<li>use 表; 连接，或者说调出一个库</li>
+<li>create database 库名字 建个库</li>
+<li>show databases 列出所有库</li>
+<li>mysqladmin -u root -p create 数据库名  也是建库</li>
+<li>use test 调出一个库</li>
+<li>select database() 看看当前库</li>
+<li>drop database 库名字 删这个库</li>
+<li>show columns from 库名  看看表的结构</li>
+<li>UPDATE Person SET Address = ‘Zhongshan 23’, City = ‘Nanjing’ WHERE LastName = ‘Wilson’</li>
+<li>在lastname这栏为wilson的那行 把address和city改了</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>sql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>尝试编写博客文章</title>
     <url>/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
     <content><![CDATA[<h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
@@ -42,6 +72,9 @@
 <p>引用 Ctrl+Shift+Q</p>
 </blockquote>
 ]]></content>
+      <tags>
+        <tag>Typora</tag>
+      </tags>
   </entry>
   <entry>
     <title>c语言可能目前常用到的数据类型修饰符等</title>

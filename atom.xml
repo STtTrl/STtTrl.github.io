@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-09-18T15:05:16.422Z</updated>
+  <updated>2021-09-20T14:22:40.739Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>10分钟学点整理点sql常用指令</title>
+    <link href="http://example.com/2021/09/21/10%E5%88%86%E9%92%9F%E5%AD%A6%E7%82%B9%E6%95%B4%E7%90%86%E7%82%B9sql%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
+    <id>http://example.com/2021/09/21/10%E5%88%86%E9%92%9F%E5%AD%A6%E7%82%B9%E6%95%B4%E7%90%86%E7%82%B9sql%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</id>
+    <published>2021-09-20T22:13:03.000Z</published>
+    <updated>2021-09-20T14:22:40.739Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;sql常用基础指令&quot;&gt;&lt;a href=&quot;#sql常用基础指令&quot; class=&quot;headerlink&quot; title=&quot;sql常用基础指令&quot;&gt;&lt;/a&gt;sql常用基础指令&lt;/h1&gt;&lt;p&gt;随便记记，意会就行，我自己看得懂就行&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="sql" scheme="http://example.com/tags/sql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>尝试编写博客文章</title>
     <link href="http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
     <id>http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</id>
     <published>2021-09-18T12:48:04.000Z</published>
-    <updated>2021-09-18T15:05:16.422Z</updated>
+    <updated>2021-09-20T14:20:40.709Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;尝试编写博客文章&quot;&gt;&lt;a href=&quot;#尝试编写博客文章&quot; class=&quot;headerlink&quot; title=&quot;尝试编写博客文章&quot;&gt;&lt;/a&gt;尝试编写博客文章&lt;/h1&gt;&lt;h2 id=&quot;—-关于Typora快捷键的些许记录&quot;&gt;&lt;a href=&quot;#—-关于Typora快捷键的些许记录&quot; class=&quot;headerlink&quot; title=&quot;—-关于Typora快捷键的些许记录&quot;&gt;&lt;/a&gt;—-关于Typora快捷键的些许记录&lt;/h2&gt;&lt;p&gt;标题 Ctrl+1/2/3 整行对应一二三级标题&lt;/p&gt;
@@ -30,6 +47,8 @@
     
     
     
+    
+    <category term="Typora" scheme="http://example.com/tags/Typora/"/>
     
   </entry>
   
