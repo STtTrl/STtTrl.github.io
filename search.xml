@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>尝试用c做一个简单的井字棋</title>
-    <url>/2021/09/23/%E5%B0%9D%E8%AF%95%E7%94%A8c%E5%81%9A%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BA%95%E5%AD%97%E6%A3%8B/</url>
-    <content><![CDATA[<h1 id="试着记录一下尝试使用c语言堆一个井字棋的过程"><a href="#试着记录一下尝试使用c语言堆一个井字棋的过程" class="headerlink" title="试着记录一下尝试使用c语言堆一个井字棋的过程"></a>试着记录一下尝试使用c语言堆一个井字棋的过程</h1><p> 编程语言还是得实操才能熟练，于是试着弄个井字棋，甚至本来想让程序永远不会输，顶多平局，可惜能力不足，这种东西归纳不动，列举又不想都列出来，索性先试着造出基础点的东西。</p>
-  <span id="more"></span> 
-
-<p>用代码堆一个井字棋，那确实还是输入，计算，输出</p>
-<hr>
-<h4 id="一、输入"><a href="#一、输入" class="headerlink" title="一、输入"></a>一、输入</h4><p>​     重要的就9个格子，完全可以用数组存储，将输入直接赋值给数组里的元素就行。</p>
-<p>输入时，如果数组元素不为0，报错，并提示换个地方下。</p>
-<h4 id="二、计算"><a href="#二、计算" class="headerlink" title="二、计算"></a>二、计算</h4><p>​        首先，需要随机决定先后手，我使用rand()随机生成一个数然后和2求余，只会有0、1两种结果。</p>
-<p>不过，只用rand()就只会在第一次计算是生成一个数，后面再怎么运行也都是这数了，这好像不太随机，不大行。</p>
-<p>​        于是我用了srand函数，原型:void srand(unsigned seed)</p>
-<p>把它的参数设成系统时间，变化的参数使每次随机数都是重新生成的，从而达到随机的目的。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">srand((<span class="keyword">unsigned</span>)time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="keyword">int</span> first= rand()%<span class="number">2</span>;  <span class="comment">//然后根据first是1还是0，决定先后手</span></span><br></pre></td></tr></table></figure>
-
-<p>​        还有一个自定义函数，大概思路是检测数组里，对应位置是1还是2，然后转换成对应坐标的O和X输出，为什么这里不用0和1呢，因为还有空着的情况，所以就直接采用0，1，2了</p>
-<p>​        检测函数的整体代码就不放这了，对我这个初学者，不好用while循环简化，太长了，并且格式不是很好看，能动起来就挺不容易的。</p>
-<p>​        还需要一个判断胜利，或者平局的条件，我是用对应数组相等，来判断的。</p>
-<p>比如，程序下的棋使用存入1，玩家写入2，当一行都为1或2时，判断某方胜利。</p>
-<p>如果9回合后没有哪方胜利，即平局</p>
-<h4 id="三、输出"><a href="#三、输出" class="headerlink" title="三、输出"></a>三、输出</h4><p>​        在特定位置输出，书上确实没有，但是可以查到，并且顺便用上了同一个头文件的换颜色。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自定义的光标定位函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setCursorPosition</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    COORD coord;</span><br><span class="line">    coord.X = x;</span><br><span class="line">    coord.Y = y;</span><br><span class="line">    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//自定义的文字颜色函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setColor</span><span class="params">(<span class="keyword">int</span> color)</span></span>&#123;</span><br><span class="line">    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color) ;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li><p>如果没有去实际操作，有些不理解的地方是肯定不会发现的（比如我在这之前不知道数组名称不配当某些自定义函数的参数）。</p>
-</li>
-<li><p>遇到问题，首先在备份后，尝试自己修改解决，还是不行，就试着描述问题，想想别人提问，或是别人总结这一问题时，会使用哪些关键词，然后看看别人怎么解决。</p>
-</li>
-<li><p>还有就是因为Sleep（）函数，我再次加深了，c语言函数需要区分好    <strong>大小写</strong></p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>c</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>非常非常初学的汇编dosbox基础指令基础用法</title>
-    <url>/2021/09/21/%E9%9D%9E%E5%B8%B8%E9%9D%9E%E5%B8%B8%E5%88%9D%E5%AD%A6%E7%9A%84%E6%B1%87%E7%BC%96dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="这大概就是汇编的基础增删改查吧"><a href="#这大概就是汇编的基础增删改查吧" class="headerlink" title="这大概就是汇编的基础增删改查吧"></a>这大概就是汇编的基础增删改查吧</h1><p>稍微整理了一下，理解了一下看到的基础用法</p>
-<span id="more"></span> 
-
-<p><strong>R指令 查看修改寄存器</strong></p>
-<p>​      -r 查看<br>​      -r ax,2000 把ax改成2000</p>
-<p><strong>D指令 查看内存</strong><br>      -d cs:ip 看看处于这个位置的内存里写了什么<br><strong>E指令 往内存里写东西</strong><br>     -e cs:ip 从这个地址开始写东西<br>     -e cs:ip 1 2 3 4 把01 02 03 04往内存写<br>     -e cs:ip ‘a’ 把a这个字符对应的ASCII码写入内存<br>     -e cs:ip b8 01 00 把这个往内存写，相当于也写入了对应的汇编指令 mov ax,0001<br><strong>U指令 解释内存中的机械指令和对应的汇编</strong><br>     -u cs:ip 从这个地址开始解释<br><strong>A指令 以汇编的形式写入指令</strong><br>      -a cs:ip mov ax,3<br><strong>T指令 执行命令</strong><br>      -t cs:ip 执行这个位置的命令</p>
-]]></content>
-      <tags>
-        <tag>汇编</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>10分钟学点整理点sql常用指令</title>
     <url>/2021/09/21/10%E5%88%86%E9%92%9F%E5%AD%A6%E7%82%B9%E6%95%B4%E7%90%86%E7%82%B9sql%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="sql常用基础指令"><a href="#sql常用基础指令" class="headerlink" title="sql常用基础指令"></a>sql常用基础指令</h1><p>随便记记，意会就行，我自己看得懂就行</p>
@@ -85,52 +29,6 @@
 ]]></content>
       <tags>
         <tag>sql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>尝试编写博客文章</title>
-    <url>/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
-<p><strong>加粗</strong> Ctrl+B</p>
-<p><em>斜体</em> Ctrl+I</p>
-<span id="more"></span> 
-
-<p><u>下划线</u> Ctrl+U</p>
-<p><del>删除线</del> Alt+Shift+5</p>
-<p><code>代码片段</code> Ctrl+Shift+`</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码块 Ctrl+Shift+K</span><br></pre></td></tr></table></figure>
-
-<p>跳出代码块 Ctrl+Enter</p>
-<p><a href="https://stttrl.github.io/">链接</a> Ctrl+K（先复制链接，然后选中要加链接的文本，按快捷键。Ctrl+左键点击文本可跳转到对应链接）(这里的链接直接返回首页)</p>
-<p>取消格式 再次按相同的快捷键</p>
-<p>有序列表 数字+点+空格 </p>
-<ol>
-<li>a</li>
-<li></li>
-</ol>
-<p> 无序列表 减号+空格</p>
-<ul>
-<li>a</li>
-<li></li>
-</ul>
-<p>任务列表 加号或减号+空格</p>
-<p>切换到列表下一行 Space+Enter</p>
-<p>嵌套列表 按Tab键</p>
-<p>退出列表 按 Shift+Tab</p>
-<table>
-<thead>
-<tr>
-<th>插入表格</th>
-<th>Ctrl+T</th>
-</tr>
-</thead>
-</table>
-<blockquote>
-<p>引用 Ctrl+Shift+Q</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>Typora</tag>
       </tags>
   </entry>
   <entry>
@@ -252,6 +150,108 @@
 ]]></content>
       <tags>
         <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>尝试用c做一个简单的井字棋</title>
+    <url>/2021/09/23/%E5%B0%9D%E8%AF%95%E7%94%A8c%E5%81%9A%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BA%95%E5%AD%97%E6%A3%8B/</url>
+    <content><![CDATA[<h1 id="试着记录一下尝试使用c语言堆一个井字棋的过程"><a href="#试着记录一下尝试使用c语言堆一个井字棋的过程" class="headerlink" title="试着记录一下尝试使用c语言堆一个井字棋的过程"></a>试着记录一下尝试使用c语言堆一个井字棋的过程</h1><p> 编程语言还是得实操才能熟练，于是试着弄个井字棋，甚至本来想让程序永远不会输，顶多平局，可惜能力不足，这种东西归纳不动，列举又不想都列出来，索性先试着造出基础点的东西。</p>
+  <span id="more"></span> 
+
+<p>用代码堆一个井字棋，那确实还是输入，计算，输出</p>
+<hr>
+<h4 id="一、输入"><a href="#一、输入" class="headerlink" title="一、输入"></a>一、输入</h4><p>​     重要的就9个格子，完全可以用数组存储，将输入直接赋值给数组里的元素就行。</p>
+<p>输入时，如果数组元素不为0，报错，并提示换个地方下。</p>
+<h4 id="二、计算"><a href="#二、计算" class="headerlink" title="二、计算"></a>二、计算</h4><p>​        首先，需要随机决定先后手，我使用rand()随机生成一个数然后和2求余，只会有0、1两种结果。</p>
+<p>不过，只用rand()就只会在第一次计算是生成一个数，后面再怎么运行也都是这数了，这好像不太随机，不大行。</p>
+<p>​        于是我用了srand函数，原型:void srand(unsigned seed)</p>
+<p>把它的参数设成系统时间，变化的参数使每次随机数都是重新生成的，从而达到随机的目的。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">srand((<span class="keyword">unsigned</span>)time(<span class="literal">NULL</span>));</span><br><span class="line"><span class="keyword">int</span> first= rand()%<span class="number">2</span>;  <span class="comment">//然后根据first是1还是0，决定先后手</span></span><br></pre></td></tr></table></figure>
+
+<p>​        还有一个自定义函数，大概思路是检测数组里，对应位置是1还是2，然后转换成对应坐标的O和X输出，为什么这里不用0和1呢，因为还有空着的情况，所以就直接采用0，1，2了</p>
+<p>​        检测函数的整体代码就不放这了，对我这个初学者，不好用while循环简化，太长了，并且格式不是很好看，能动起来就挺不容易的。</p>
+<p>​        还需要一个判断胜利，或者平局的条件，我是用对应数组相等，来判断的。</p>
+<p>比如，程序下的棋使用存入1，玩家写入2，当一行都为1或2时，判断某方胜利。</p>
+<p>如果9回合后没有哪方胜利，即平局</p>
+<h4 id="三、输出"><a href="#三、输出" class="headerlink" title="三、输出"></a>三、输出</h4><p>​        在特定位置输出，书上确实没有，但是可以查到，并且顺便用上了同一个头文件的换颜色。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//自定义的光标定位函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setCursorPosition</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    COORD coord;</span><br><span class="line">    coord.X = x;</span><br><span class="line">    coord.Y = y;</span><br><span class="line">    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//自定义的文字颜色函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setColor</span><span class="params">(<span class="keyword">int</span> color)</span></span>&#123;</span><br><span class="line">    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color) ;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>如果没有去实际操作，有些不理解的地方是肯定不会发现的（比如我在这之前不知道数组名称不配当某些自定义函数的参数）。</p>
+</li>
+<li><p>遇到问题，首先在备份后，尝试自己修改解决，还是不行，就试着描述问题，想想别人提问，或是别人总结这一问题时，会使用哪些关键词，然后看看别人怎么解决。</p>
+</li>
+<li><p>还有就是因为Sleep（）函数，我再次加深了，c语言函数需要区分好    <strong>大小写</strong></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>c</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>尝试编写博客文章</title>
+    <url>/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h1 id="尝试编写博客文章"><a href="#尝试编写博客文章" class="headerlink" title="尝试编写博客文章"></a>尝试编写博客文章</h1><h2 id="—-关于Typora快捷键的些许记录"><a href="#—-关于Typora快捷键的些许记录" class="headerlink" title="—-关于Typora快捷键的些许记录"></a>—-关于Typora快捷键的些许记录</h2><p>标题 Ctrl+1/2/3 整行对应一二三级标题</p>
+<p><strong>加粗</strong> Ctrl+B</p>
+<p><em>斜体</em> Ctrl+I</p>
+<span id="more"></span> 
+
+<p><u>下划线</u> Ctrl+U</p>
+<p><del>删除线</del> Alt+Shift+5</p>
+<p><code>代码片段</code> Ctrl+Shift+`</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码块 Ctrl+Shift+K</span><br></pre></td></tr></table></figure>
+
+<p>跳出代码块 Ctrl+Enter</p>
+<p><a href="https://stttrl.github.io/">链接</a> Ctrl+K（先复制链接，然后选中要加链接的文本，按快捷键。Ctrl+左键点击文本可跳转到对应链接）(这里的链接直接返回首页)</p>
+<p>取消格式 再次按相同的快捷键</p>
+<p>有序列表 数字+点+空格 </p>
+<ol>
+<li>a</li>
+<li></li>
+</ol>
+<p> 无序列表 减号+空格</p>
+<ul>
+<li>a</li>
+<li></li>
+</ul>
+<p>任务列表 加号或减号+空格</p>
+<p>切换到列表下一行 Space+Enter</p>
+<p>嵌套列表 按Tab键</p>
+<p>退出列表 按 Shift+Tab</p>
+<table>
+<thead>
+<tr>
+<th>插入表格</th>
+<th>Ctrl+T</th>
+</tr>
+</thead>
+</table>
+<blockquote>
+<p>引用 Ctrl+Shift+Q</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>Typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>非常非常初学的汇编dosbox基础指令基础用法</title>
+    <url>/2021/09/21/%E9%9D%9E%E5%B8%B8%E9%9D%9E%E5%B8%B8%E5%88%9D%E5%AD%A6%E7%9A%84%E6%B1%87%E7%BC%96dosbox%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="这大概就是汇编的基础增删改查吧"><a href="#这大概就是汇编的基础增删改查吧" class="headerlink" title="这大概就是汇编的基础增删改查吧"></a>这大概就是汇编的基础增删改查吧</h1><p>稍微整理了一下，理解了一下看到的基础用法</p>
+<span id="more"></span> 
+
+<p><strong>R指令 查看修改寄存器</strong></p>
+<p>​      -r 查看<br>​      -r ax,2000 把ax改成2000</p>
+<p><strong>D指令 查看内存</strong><br>      -d cs:ip 看看处于这个位置的内存里写了什么<br><strong>E指令 往内存里写东西</strong><br>     -e cs:ip 从这个地址开始写东西<br>     -e cs:ip 1 2 3 4 把01 02 03 04往内存写<br>     -e cs:ip ‘a’ 把a这个字符对应的ASCII码写入内存<br>     -e cs:ip b8 01 00 把这个往内存写，相当于也写入了对应的汇编指令 mov ax,0001<br><strong>U指令 解释内存中的机械指令和对应的汇编</strong><br>     -u cs:ip 从这个地址开始解释<br><strong>A指令 以汇编的形式写入指令</strong><br>      -a cs:ip mov ax,3<br><strong>T指令 执行命令</strong><br>      -t cs:ip 执行这个位置的命令</p>
+]]></content>
+      <tags>
+        <tag>汇编</tag>
       </tags>
   </entry>
 </search>
