@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Buu re 01</title>
+    <url>/2021/09/26/Buu%20re/</url>
+    <content><![CDATA[<h1 id="尝试Buu的入门re题"><a href="#尝试Buu的入门re题" class="headerlink" title="尝试Buu的入门re题"></a>尝试Buu的入门re题</h1><p>因为题比较入门，所以做的比较轻松</p>
+<span id="more"></span> 
+
+<h2 id="一、easyre"><a href="#一、easyre" class="headerlink" title="一、easyre"></a>一、easyre</h2><p>打开就能看到flag</p>
+<p><img src="https://i.loli.net/2021/09/25/quEIinget3vWcdU.png" alt="POJY9S_2~A3MW4UEG58J5A1.png"></p>
+<hr>
+<h2 id="二、新年快乐"><a href="#二、新年快乐" class="headerlink" title="二、新年快乐"></a>二、新年快乐</h2><p>查壳→查到upx壳→脱壳→打开</p>
+<p><img src="https://i.loli.net/2021/09/25/khpRxfMbBN8QIVy.png" alt="V_ZG_WZO7GQ7_5E_J9_Y3P6.png"></p>
+<p>可以看到输入和HapperNewYear! 一样时，输出this is true flag </p>
+<p>所有得到flag为HapperNewYear!</p>
+<h2 id="三、reverse1"><a href="#三、reverse1" class="headerlink" title="三、reverse1"></a>三、reverse1</h2><p>打开后，按F5，查看伪代码</p>
+<p><img src="https://i.loli.net/2021/09/25/iySD8vUj96mwadY.png" alt="_Y_YCF9_M6G7___H6RGQ6JG.png"></p>
+<p>看出要使输入和Str2一样，双击Str2</p>
+<p><img src="https://i.loli.net/2021/09/25/ecoLPTbzHdChp4r.png" alt="PG6U_JNO8DVOU_QH6EBT@3K.png"></p>
+<p>再往上看</p>
+<p>![8BKG_0AD`~IWJ_YIK1___T6.png](<a href="https://i.loli.net/2021/09/25/SOmctJG6rBEMD9A.png">https://i.loli.net/2021/09/25/SOmctJG6rBEMD9A.png</a>)</p>
+<p>有一个逐个替换数组内元素的循环</p>
+<p>按R直接转字符</p>
+<p><img src="https://i.loli.net/2021/09/25/7T83kof6DxPhtKr.png" alt="T_`VSV~___P4DTG@YD`16_H.png"></p>
+<p>看出是把o换成0</p>
+<p>得到flag</p>
+<ul>
+<li>其实再往上看，有一个看不懂赋值，看不懂结束条件，且用c跑不动的循环，也没发现在转伪代码前对应的汇编指令，问了学长，可能是代码混淆。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/25/yYKFcEBX4t8vquP.png" alt="__5WVI_9_P8MX9JMHTGG_8J.png"></p>
+<hr>
+<h2 id="四、reverse2"><a href="#四、reverse2" class="headerlink" title="四、reverse2"></a>四、reverse2</h2><p><img src="http://i0.hdslb.com/bfs/album/5366a828d8730bd60af86798285f29fa41064c15.png" alt="image-20210925234619161"></p>
+<p>打开看到上面这些</p>
+<p>双击flag</p>
+<p>![PS4Y9S6J`_29UBI55_VE_IV.png](<a href="https://i.loli.net/2021/09/25/cePIMs5jT7URm6u.png">https://i.loli.net/2021/09/25/cePIMs5jT7URm6u.png</a>)</p>
+<p>r键 7Bh转成 ’ { ‘</p>
+<p><img src="https://i.loli.net/2021/09/25/NhDoeL3ARUdjXEC.png" alt="4YR07_MLB`_`YQKY9A_U_FX.png"></p>
+<p>再回到原本的伪代码</p>
+<p>![FXKKDX3CXQ0MK`_<del>__F</del>S_T.png](<a href="https://i.loli.net/2021/09/25/fbqYylzpIUKrw2o.png">https://i.loli.net/2021/09/25/fbqYylzpIUKrw2o.png</a>)</p>
+<p>看到逐个把i r 换成1</p>
+<p>得到flag</p>
+<hr>
+<h2 id="五、内涵的软件"><a href="#五、内涵的软件" class="headerlink" title="五、内涵的软件"></a>五、内涵的软件</h2><p>![_SO3`<a href="mailto:&#x5f;&#95;&#87;&#82;&#95;&#57;&#69;&#95;&#x4e;&#85;&#x56;&#77;&#75;&#x40;&#x55;&#80;&#x49;&#x31;&#46;&#x70;&#110;&#x67;">&#x5f;&#95;&#87;&#82;&#95;&#57;&#69;&#95;&#x4e;&#85;&#x56;&#77;&#75;&#x40;&#x55;&#80;&#x49;&#x31;&#46;&#x70;&#110;&#x67;</a>](<a href="https://i.loli.net/2021/09/25/mFwdrjc28xolBES.png">https://i.loli.net/2021/09/25/mFwdrjc28xolBES.png</a>)</p>
+<p>打开，看到 下文没有提到的变量就v5了，但是外面的是DBAPP，想不到有什么转码能把这个转成flag，但是又找不到别的信息，于是直接提交，失败，改成flag提交，成功</p>
+<hr>
+<h2 id="六、xor"><a href="#六、xor" class="headerlink" title="六、xor"></a>六、xor</h2><p>其实也只是简单的用了异或算法</p>
+<p><img src="https://i.loli.net/2021/09/26/vVCb851LakRiEwS.png" alt="~6_XS6XQG_S052U4H5___Y5.png"></p>
+<p>打开global看有哪些字符</p>
+<p>![7N0RF_0H99_2_C8_N9`8C_Q.png](<a href="https://i.loli.net/2021/09/26/TExe3UiV6ctNgdz.png">https://i.loli.net/2021/09/26/TExe3UiV6ctNgdz.png</a>)</p>
+<p>把算法抄下来，结果输出乱码了，于是多加了个f[]数组，就行了</p>
+<p><del>虽然输出还是少个f，自己加上就行</del></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> __b[<span class="number">264</span>]=&#123;<span class="string">&#x27;f&#x27;</span>,<span class="number">0xA</span>,<span class="string">&#x27;k&#x27;</span>,<span class="number">0xC</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;&amp;&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;x&#x27;</span>,<span class="number">0xD</span>,<span class="string">&#x27;Z&#x27;</span>,<span class="string">&#x27;;&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;p&#x27;</span>,<span class="number">0x19</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">0x1F</span>,<span class="string">&#x27;v&#x27;</span>,<span class="string">&#x27;&quot;&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;#&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="number">0xE</span>,<span class="string">&#x27;g&#x27;</span>,<span class="number">6</span>,<span class="string">&#x27;h&#x27;</span>,<span class="number">0xF</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;O&#x27;</span>&#125;;</span><br><span class="line">   <span class="keyword">char</span> f[<span class="number">100</span>]; </span><br><span class="line"> </span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span>  i = <span class="number">1</span>; i &lt; <span class="number">33</span>; ++i )&#123;</span><br><span class="line">     __b[i] = <span class="keyword">char</span>(__b[i]);</span><br><span class="line">    f[i]=__b[i] ^ __b[i - <span class="number">1</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,f[i]);   </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>今天做的很基础，很入门，很相似，提升地只有一点点看代码的能力，和一点点写c语言脚本的能力</p>
+<p>和在比赛里看到的题目比，差很多</p>
+]]></content>
+      <tags>
+        <tag>re</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>攻防世界re新手区部分记录</title>
     <url>/2021/09/24/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8Cre%E6%96%B0%E6%89%8B%E5%8C%BA%E9%83%A8%E5%88%86%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p> 初学，尝试</p>
@@ -18,7 +77,7 @@
 <p>看着像16进制，转换，结束。</p>
 <h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><ul>
 <li>memset() 函数 初始化内存，这里memset(v10,0,sizeof(v10))表示把数组v10内容全换成0。</li>
-<li>sprintf()函数 ，把格式化输出转入字符串，查了只后才发现原来是在这里转成16进制的。</li>
+<li>sprintf()函数 ，把格式化输出转入字符串，查了之后才发现原来是在这里转成16进制的。</li>
 </ul>
 <hr>
 <h3 id="二、insanity"><a href="#二、insanity" class="headerlink" title="二、insanity"></a>二、insanity</h3><p><del>既然它都insanity了，那我当然可以直接拿txt打开</del></p>
@@ -36,12 +95,17 @@
 
 <p>看得懂代码就好做，总之思路就是绕过重重if，顺便得到 fist second argv[3]都对应什么。</p>
 <ol>
-<li><p>first != 0xcafe →i am wrong，所以 first = 0xcafe</p>
-</li>
-<li><p>second需要符合 和5求余不等于3 和17求余等于8，我写了个代码</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> n; </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x;x&lt;<span class="number">10</span>;x++)&#123;               <span class="comment">//实际上不用输出这么多次</span></span><br><span class="line">	i = <span class="number">17</span>*n+<span class="number">8</span> ;                         <span class="comment">//看wp别人都是直接取25不写这段代码的</span></span><br><span class="line">	<span class="keyword">if</span>(i%<span class="number">5</span>!=<span class="number">3</span>)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);          </span><br><span class="line">	n++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;                              </span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>最后一个，strcmp()函数，相等是返回0，为假，可以阻止if触发，所以argv[3]=”h4cky0u”</p>
-</li>
+<li>first != 0xcafe →i am wrong，所以 first = 0xcafe</li>
+<li>second需要符合 和5求余不等于3 和17求余等于8，我写了个代码</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> n; </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x;x&lt;<span class="number">10</span>;x++)&#123;               <span class="comment">//实际上不用输出这么多次</span></span><br><span class="line">	i = <span class="number">17</span>*n+<span class="number">8</span> ;                         <span class="comment">//看wp别人都是直接取25不写这段代码的</span></span><br><span class="line">	<span class="keyword">if</span>(i%<span class="number">5</span>!=<span class="number">3</span>)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,i);          </span><br><span class="line">	n++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;                              </span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ol start="3">
+<li>最后一个，strcmp()函数，相等是返回0，为假，可以阻止if触发，所以argv[3]=”h4cky0u”</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> first = <span class="number">0xcafe</span>;</span><br><span class="line">    <span class="keyword">int</span> second = <span class="number">25</span>;</span><br><span class="line">    argv[<span class="number">3</span>] = <span class="string">&quot;h4cky0u&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> hash = first * <span class="number">31337</span> + (second % <span class="number">17</span>) * <span class="number">11</span> + <span class="built_in">strlen</span>(argv[<span class="number">3</span>]) - <span class="number">1615810207</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Get your key: &quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%x\n&quot;</span>, hash);</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
