@@ -18,7 +18,7 @@
 <p>看出要使输入和Str2一样，双击Str2</p>
 <p><img src="https://i.loli.net/2021/09/25/ecoLPTbzHdChp4r.png" alt="PG6U_JNO8DVOU_QH6EBT@3K.png"></p>
 <p>再往上看</p>
-<p>![8BKG_0AD`~IWJ_YIK1___T6.png](<a href="https://i.loli.net/2021/09/25/SOmctJG6rBEMD9A.png">https://i.loli.net/2021/09/25/SOmctJG6rBEMD9A.png</a>)</p>
+<p><img src="https://i.loli.net/2021/09/26/GMN67sr3fCRDxAO.png" alt="Z_J0__MD_I_7SK`84_`W7_4.png"></p>
 <p>有一个逐个替换数组内元素的循环</p>
 <p>按R直接转字符</p>
 <p><img src="https://i.loli.net/2021/09/25/7T83kof6DxPhtKr.png" alt="T_`VSV~___P4DTG@YD`16_H.png"></p>
@@ -29,24 +29,24 @@
 </ul>
 <p><img src="https://i.loli.net/2021/09/25/yYKFcEBX4t8vquP.png" alt="__5WVI_9_P8MX9JMHTGG_8J.png"></p>
 <hr>
-<h2 id="四、reverse2"><a href="#四、reverse2" class="headerlink" title="四、reverse2"></a>四、reverse2</h2><p><img src="http://i0.hdslb.com/bfs/album/5366a828d8730bd60af86798285f29fa41064c15.png" alt="image-20210925234619161"></p>
+<h2 id="四、reverse2"><a href="#四、reverse2" class="headerlink" title="四、reverse2"></a>四、reverse2</h2><p>![6NXLMI_8VD___D4H`I69JDD.png](<a href="https://i.loli.net/2021/09/26/JGQUPTkZOrobHtg.png">https://i.loli.net/2021/09/26/JGQUPTkZOrobHtg.png</a>)</p>
 <p>打开看到上面这些</p>
 <p>双击flag</p>
-<p>![PS4Y9S6J`_29UBI55_VE_IV.png](<a href="https://i.loli.net/2021/09/25/cePIMs5jT7URm6u.png">https://i.loli.net/2021/09/25/cePIMs5jT7URm6u.png</a>)</p>
+<p><img src="https://i.loli.net/2021/09/26/qas2xBAUEco6mJy.png" alt="K_6_QE6LHX7V1E~ZVL2_@_6.png"></p>
 <p>r键 7Bh转成 ’ { ‘</p>
 <p><img src="https://i.loli.net/2021/09/25/NhDoeL3ARUdjXEC.png" alt="4YR07_MLB`_`YQKY9A_U_FX.png"></p>
 <p>再回到原本的伪代码</p>
-<p>![FXKKDX3CXQ0MK`_<del>__F</del>S_T.png](<a href="https://i.loli.net/2021/09/25/fbqYylzpIUKrw2o.png">https://i.loli.net/2021/09/25/fbqYylzpIUKrw2o.png</a>)</p>
+<p>![`XW0__V5RM_D_39O8KCR2_F.png](<a href="https://i.loli.net/2021/09/26/HlRrITZqjOPSi4K.png">https://i.loli.net/2021/09/26/HlRrITZqjOPSi4K.png</a>)</p>
 <p>看到逐个把i r 换成1</p>
 <p>得到flag</p>
 <hr>
-<h2 id="五、内涵的软件"><a href="#五、内涵的软件" class="headerlink" title="五、内涵的软件"></a>五、内涵的软件</h2><p>![_SO3`<a href="mailto:&#x5f;&#95;&#87;&#82;&#95;&#57;&#69;&#95;&#x4e;&#85;&#x56;&#77;&#75;&#x40;&#x55;&#80;&#x49;&#x31;&#46;&#x70;&#110;&#x67;">&#x5f;&#95;&#87;&#82;&#95;&#57;&#69;&#95;&#x4e;&#85;&#x56;&#77;&#75;&#x40;&#x55;&#80;&#x49;&#x31;&#46;&#x70;&#110;&#x67;</a>](<a href="https://i.loli.net/2021/09/25/mFwdrjc28xolBES.png">https://i.loli.net/2021/09/25/mFwdrjc28xolBES.png</a>)</p>
+<h2 id="五、内涵的软件"><a href="#五、内涵的软件" class="headerlink" title="五、内涵的软件"></a>五、内涵的软件</h2><p><img src="https://i.loli.net/2021/09/26/wEDF93NqdmfAKzn.png" alt="1@XSX_P8J___CI3B@R0__YB.png"></p>
 <p>打开，看到 下文没有提到的变量就v5了，但是外面的是DBAPP，想不到有什么转码能把这个转成flag，但是又找不到别的信息，于是直接提交，失败，改成flag提交，成功</p>
 <hr>
 <h2 id="六、xor"><a href="#六、xor" class="headerlink" title="六、xor"></a>六、xor</h2><p>其实也只是简单的用了异或算法</p>
 <p><img src="https://i.loli.net/2021/09/26/vVCb851LakRiEwS.png" alt="~6_XS6XQG_S052U4H5___Y5.png"></p>
 <p>打开global看有哪些字符</p>
-<p>![7N0RF_0H99_2_C8_N9`8C_Q.png](<a href="https://i.loli.net/2021/09/26/TExe3UiV6ctNgdz.png">https://i.loli.net/2021/09/26/TExe3UiV6ctNgdz.png</a>)</p>
+<p><img src="https://i.loli.net/2021/09/26/rwc7omIaqtMsL8T.png" alt="XG__YA_5@FJNXPVG_0_V6DI.png"></p>
 <p>把算法抄下来，结果输出乱码了，于是多加了个f[]数组，就行了</p>
 <p><del>虽然输出还是少个f，自己加上就行</del></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> __b[<span class="number">264</span>]=&#123;<span class="string">&#x27;f&#x27;</span>,<span class="number">0xA</span>,<span class="string">&#x27;k&#x27;</span>,<span class="number">0xC</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;&amp;&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;x&#x27;</span>,<span class="number">0xD</span>,<span class="string">&#x27;Z&#x27;</span>,<span class="string">&#x27;;&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;p&#x27;</span>,<span class="number">0x19</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">0x1F</span>,<span class="string">&#x27;v&#x27;</span>,<span class="string">&#x27;&quot;&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;#&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="number">0xE</span>,<span class="string">&#x27;g&#x27;</span>,<span class="number">6</span>,<span class="string">&#x27;h&#x27;</span>,<span class="number">0xF</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;O&#x27;</span>&#125;;</span><br><span class="line">   <span class="keyword">char</span> f[<span class="number">100</span>]; </span><br><span class="line"> </span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span>  i = <span class="number">1</span>; i &lt; <span class="number">33</span>; ++i )&#123;</span><br><span class="line">     __b[i] = <span class="keyword">char</span>(__b[i]);</span><br><span class="line">    f[i]=__b[i] ^ __b[i - <span class="number">1</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,f[i]);   </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
