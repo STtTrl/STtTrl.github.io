@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-09-25T16:38:26.899Z</updated>
+  <updated>2021-09-30T07:20:06.422Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>buu的一道纠结了很久的题</title>
+    <link href="http://example.com/2021/09/30/buu%E7%9A%84%E4%B8%80%E9%81%93%E7%BA%A0%E7%BB%93%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E9%A2%98/"/>
+    <id>http://example.com/2021/09/30/buu%E7%9A%84%E4%B8%80%E9%81%93%E7%BA%A0%E7%BB%93%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E9%A2%98/</id>
+    <published>2021-09-30T14:37:32.000Z</published>
+    <updated>2021-09-30T07:20:06.422Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;一道题纠结了很久，但也没弄的非常明白，记录，希望以后可以变得更强&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Buu re 01</title>

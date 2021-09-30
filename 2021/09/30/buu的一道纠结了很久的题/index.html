@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    buu的一道纠结了很久的题 |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-buu的一道纠结了很久的题" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  buu的一道纠结了很久的题
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/30/buu%E7%9A%84%E4%B8%80%E9%81%93%E7%BA%A0%E7%BB%93%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E9%A2%98/" class="article-date">
+  <time datetime="2021-09-30T14:37:32.000Z" itemprop="datePublished">2021-09-30</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>一道题纠结了很久，但也没弄的非常明白，记录，希望以后可以变得更强</p>
+<span id="more"></span> 
+
+<h2 id="刮开有奖"><a href="#刮开有奖" class="headerlink" title="刮开有奖"></a>刮开有奖</h2><p>打开程序，只有一个窗口，于是用ida打开，看到没有自动识别出main函数，但是找到了和加密很有关系的函数。</p>
+<p><img src="https://i.loli.net/2021/09/30/ScriaNvsnfIDPhM.png" alt="1.png"></p>
+<p>8位数，然后看看加密后6位的函数，加密方式长得很像base64（因为我写不出base64转换，但知道它是怎么转的，所以不确定）</p>
+<p>然后shift+F12在字符串看到了base64替换表，那应该确实是了</p>
+<p><img src="https://i.loli.net/2021/09/30/eNk1WmfwPxJvQ7d.png" alt="2.png"></p>
+<p>于是得到**WP1jMp</p>
+<p>前两位</p>
+<p><img src="https://i.loli.net/2021/09/30/uXjVCEZ3ap1P8Gl.png" alt="`QXB`O6S5RTP6_V__T_JZNR.png"></p>
+<p><img src="https://i.loli.net/2021/09/30/XzVwHgiqGaBCjbQ.png" alt="5P.png"></p>
+<p>我把90+34 67 直接转成字符，提交，flag不对。</p>
+<p>于是注意到<img src="https://i.loli.net/2021/09/30/BVOHYq1KLPoSmG2.png" alt="5.png"></p>
+<p>有一个sub_4010F0函数，点开</p>
+<p><img src="https://i.loli.net/2021/09/30/sjc6PXDBGynflbr.png" alt="_KK__X7GJB9C_X~_J~8347H.png"></p>
+<p>看不懂，尝试弄个一个意思的代码，试试调试，结果不仅看不懂，放进c还跑不动，改完报错的地方还是跑不动，并且理解不了思路，写不出来，捣鼓了挺长时间→查wp→这是个排序用的函数，但是我还是看不懂。</p>
+<p>于是找到了别人怎么把它写成c（找到的网页默认不允许选中，于是我用ctrl+a ctrl+c复制了所有文字然后把我想要的拿了出来）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line">   <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> __cdecl <span class="title">sub_4010F0</span><span class="params">(<span class="keyword">char</span> *a1, <span class="keyword">int</span> a2, <span class="keyword">int</span> a3)</span> <span class="comment">// int a1</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">     <span class="keyword">int</span> i; <span class="comment">// esi</span></span><br><span class="line">     <span class="keyword">int</span> v5; <span class="comment">// ecx</span></span><br><span class="line">     <span class="keyword">int</span> v6; <span class="comment">// edx</span></span><br><span class="line">   </span><br><span class="line">    result = a3;</span><br><span class="line">    <span class="keyword">for</span> ( i = a2; i &lt;= a3; a2 = i )</span><br><span class="line">    &#123;</span><br><span class="line">      v5 = i; <span class="comment">//v5 = 4 * i 这一行为什么要改？求大佬指教 </span></span><br><span class="line">      v6 = a1[i]; <span class="comment">//v6 = *(_DWORD *)(4 * i + a1)</span></span><br><span class="line">      <span class="keyword">if</span> ( a2 &lt; result &amp;&amp; i &lt; result )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( v6 &gt; a1[result] ) <span class="comment">//v6 &gt; *(_DWORD *)(a1 + 4 * result)</span></span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            ++i;</span><br><span class="line">            a1[v5] = a1[result]; <span class="comment">//*(_DWORD *)(v5 + a1) = *(_DWORD *)(a1 + 4 * result)</span></span><br><span class="line">            <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">while</span> ( a1[i] &lt;= v6 ) <span class="comment">// *(_DWORD *)(a1 + 4 * i) &lt;= v6</span></span><br><span class="line">            &#123;</span><br><span class="line">              <span class="keyword">if</span> ( ++i &gt;= result )</span><br><span class="line">                <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            v5 = i; <span class="comment">//v5 = 4 * i </span></span><br><span class="line">            a1[result] = a1[i]; <span class="comment">// *(_DWORD *)(a1 + 4 * result) = *(_DWORD *)(4 * i + a1)</span></span><br><span class="line">          &#125;</span><br><span class="line">          --result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> ( i &lt; result );</span><br><span class="line">      &#125;</span><br><span class="line">  LABEL_13:</span><br><span class="line">      a1[result] = v6; <span class="comment">//*(_DWORD *)(a1 + 4 * result) = v6</span></span><br><span class="line">      sub_4010F0(a1, a2, i - <span class="number">1</span>);</span><br><span class="line">      result = a3;</span><br><span class="line">      ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">char</span> str[<span class="number">20</span>] = &#123;<span class="number">90</span>,<span class="number">74</span>,<span class="number">83</span>,<span class="number">69</span>,<span class="number">67</span>,<span class="number">97</span>,<span class="number">78</span>,<span class="number">72</span>,<span class="number">51</span>,<span class="number">110</span>,<span class="number">103</span>&#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">     sub_4010F0(str,<span class="number">0</span>,<span class="number">10</span>);</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实我还是不是很懂思路，所以还是放在这以后看，如果有看得懂思路且有信心教会我的好心人请直接来教教我！</p>
+<p>排序完再转换就得到了前2位，于是得到flag</p>
+<hr>
+<p>把看不懂的反汇编出的代码写成跑得动、能一步一步看结果的代码的能力真的很重要！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/09/30/buu%E7%9A%84%E4%B8%80%E9%81%93%E7%BA%A0%E7%BB%93%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E9%A2%98/" data-id="cku6ly5rt0004h4w1bhv3duln" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/09/26/Buu%20re/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Buu re 01</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
