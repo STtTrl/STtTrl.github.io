@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-09-30T07:20:06.422Z</updated>
+  <updated>2021-10-02T10:00:18.251Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>尝试复现pwn入门题的wp</title>
+    <link href="http://example.com/2021/10/03/%E5%B0%9D%E8%AF%95%E5%A4%8D%E7%8E%B0pwn%E5%85%A5%E9%97%A8wp/"/>
+    <id>http://example.com/2021/10/03/%E5%B0%9D%E8%AF%95%E5%A4%8D%E7%8E%B0pwn%E5%85%A5%E9%97%A8wp/</id>
+    <published>2021-10-02T16:42:41.000Z</published>
+    <updated>2021-10-02T10:00:18.251Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;很不了解，很想尝试，顺便借复现wp补充工具，于是试了一道题&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="pwn" scheme="http://example.com/tags/pwn/"/>
+    
+  </entry>
   
   <entry>
     <title>buu的一道纠结了很久的题</title>

