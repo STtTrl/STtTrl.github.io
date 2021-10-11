@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-10-02T10:00:18.251Z</updated>
+  <updated>2021-10-11T05:32:14.935Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>鹤城杯的一些题</title>
+    <link href="http://example.com/2021/10/11/%E9%B9%A4%E5%9F%8E%E6%9D%AF%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98/"/>
+    <id>http://example.com/2021/10/11/%E9%B9%A4%E5%9F%8E%E6%9D%AF%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98/</id>
+    <published>2021-10-11T13:00:32.000Z</published>
+    <updated>2021-10-11T05:32:14.935Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;虽然比赛群里都说这比赛都是原题，但是我没做过原题，而且给的re也太难了，记录一下别的能看得懂的&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>尝试复现pwn入门题的wp</title>
