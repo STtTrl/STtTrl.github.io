@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>鲲鹏杯miscwp</title>
+    <url>/2021/10/18/%E9%B2%B2%E9%B9%8F%E6%9D%AFmiscwp/</url>
+    <content><![CDATA[<h1 id="鲲鹏杯-misc-wp"><a href="#鲲鹏杯-misc-wp" class="headerlink" title="鲲鹏杯 misc wp"></a>鲲鹏杯 misc wp</h1><p>我也不知道这几题到底是misc几，我拿到的只有文件，登不上，怎么都登不上，然后有些试探步骤就不写了，因为忘了</p>
+<hr>
+<h3 id="1910255db2c8e04f498-zip"><a href="#1910255db2c8e04f498-zip" class="headerlink" title="1910255db2c8e04f498.zip"></a>1910255db2c8e04f498.zip</h3><p>打开，有张图</p>
+<p><img src="https://i.loli.net/2021/10/16/tv7ozdZ4KDbgJGR.png" alt="11.png"></p>
+<p>用010editor打开，crc报错，所以很可能被修改过</p>
+<p><img src="https://i.loli.net/2021/10/16/1rEQKHmtMxhZwVX.png" alt="214.png"></p>
+<p>找到长度，改长</p>
+<p><img src="https://i.loli.net/2021/10/16/D59CBvnal8ZjdwK.png" alt="33.png"></p>
+<p>其实已经可以找到flag了</p>
+<p><img src="https://i.loli.net/2021/10/16/VHicnSWAvFQZdbs.png" alt="444.png"></p>
+<p>放大就能看到，有点暗</p>
+<p><img src="https://i.loli.net/2021/10/16/S8Nbky17LZzDCtG.png" alt="3.png"></p>
+<p>也可以用stegsolve切一下通道，有些就可以很明显地看到flag，但是那样的话长度不能改太长，不然放不进去，改个差不多的就行</p>
+<p><img src="https://i.loli.net/2021/10/16/ftbpNr2gC13PIem.png" alt="Q41.png"></p>
+<hr>
+<h3 id="5afea376cfc75-zip"><a href="#5afea376cfc75-zip" class="headerlink" title="5afea376cfc75.zip"></a>5afea376cfc75.zip</h3><p>打开，看到一张，只有黑白，所以显得大小不太对的图</p>
+<p><img src="https://i.loli.net/2021/10/16/HDbAPGVjUkOT4xR.png" alt="2414.png"></p>
+<p>010打开，我发现我看不懂，那就不手动提了</p>
+<p><img src="https://i.loli.net/2021/10/16/IxHbj4nkc6Y3tGZ.png" alt="BUA.png"></p>
+<p>上foremost</p>
+<p><img src="https://i.loli.net/2021/10/16/LtaOmQeHGTIDx29.png" alt="L86.png"></p>
+<p>拿到压缩文件，有加密，而且flag.txt没啥有用的东西</p>
+<p><img src="https://i.loli.net/2021/10/16/vHqOoW6g4PSNMzd.png" alt="RX.png"></p>
+<p>ziperello不知道为什么读取不了，那用archpr</p>
+<p>密码是1020</p>
+<p>然后gif真的是gif，而且下棋的是真的慢</p>
+<p>用stegsolve的这个功能，翻到一个不一样的</p>
+<p><img src="https://i.loli.net/2021/10/16/L1hHswOWpTifRkM.png" alt="9K.png"></p>
+<p><img src="https://i.loli.net/2021/10/16/zuqO6jlAVvSCM8n.png" alt="NLU.png"></p>
+<p>保存下来 再用stegsolve打开，直接翻一翻</p>
+<p>拿到二维码，扫了就有flag</p>
+<hr>
+<h3 id="1910255db2c8ea4e4d0-png"><a href="#1910255db2c8ea4e4d0-png" class="headerlink" title="1910255db2c8ea4e4d0.png"></a>1910255db2c8ea4e4d0.png</h3><p>直接打开→打不开</p>
+<p>用010editor/记事本打开</p>
+<p>就挺常见易懂的base64转图片</p>
+<p><img src="https://i.loli.net/2021/10/16/bvc2wPHDjUIhf1M.png" alt="11B17.png"></p>
+<p>搜一下在线工具</p>
+<p>拿到二维码</p>
+<p><img src="https://i.loli.net/2021/10/16/GQTPovgLHkwy5aV.png" alt="ZRSE.png"></p>
+<p>扫一下就有一串base64，转一下就有flag</p>
+<hr>
+<p>拿到题的时候，时间不多了，有点急，甚至手滑把editor参数栏关了之后更着急地找了半天，甚至没有当场看到 真正的ctf选手.png那题 藏在暗处的flag</p>
+]]></content>
+  </entry>
+  <entry>
     <title>鹤城杯的一些题</title>
     <url>/2021/10/11/%E9%B9%A4%E5%9F%8E%E6%9D%AF%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98/</url>
     <content><![CDATA[<p>虽然比赛群里都说这比赛都是原题，但是我没做过原题，而且给的re也太难了，记录一下别的能看得懂的</p>
@@ -28,6 +75,7 @@
 <p>4O595954494Q32515046324757595N534R52415653334357474R4N575955544R4O5N4Q46434S4O59474253464Q5N444R4Q51334557524O5N4S424944473542554O595N44534O324R49565746515532464O49345649564O464R4R494543504N35</p>
 <p>rot13→base16→base32→base64</p>
 <p>然后就转不动了，说是要去混淆，但没有详细说怎么操作，等我了解了再来编辑</p>
+<p>编辑：装完ciphey，秒了</p>
 <hr>
 <h3 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h3><p>这题比较简单，但是我赛后才懂具体怎么操作</p>
 <p><img src="https://i.loli.net/2021/10/11/PfSvRW6JHy3kq8n.png" alt="333333.png"></p>
