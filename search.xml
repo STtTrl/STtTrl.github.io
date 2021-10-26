@@ -1,6 +1,340 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NSSCTFReverse题解，但就挺加密解密的</title>
+    <url>/2021/10/27/NSSCTFReverse%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%BD%86%E5%B0%B1%E6%8C%BA%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%9A%84/</url>
+    <content><![CDATA[<p>首先，做了2道附件给程序的简单常见的re，然后剩下了一堆，python脚本，打开一看全是加密呢，并且刚好挑了一道需要爆破才能解的，逆了半天放弃了，难顶，然后我看wp的时候发现这种题爆破确实好用，有时候逆着算确实花时间</p>
+<span id="more"></span> 
+
+<hr>
+<h2 id="简简单单的逻辑"><a href="#简简单单的逻辑" class="headerlink" title="简简单单的逻辑"></a>简简单单的逻辑</h2><p>爆破就行了，</p>
+<pre><code>list = [47, 138, 127, 57, 117, 188, 51, 143, 17, 84, 42, 135, 76, 105, 28, 169, 25]
+results=&#39;bcfba4d0038d48bd4b00f82796d393dfec&#39;
+flag = &#39;&#39;
+for i in range(len(list)):
+    for j in range(32,128):
+        key = (list[i]&gt;&gt;4)+((list[i] &amp; 0xf)&lt;&lt;4)
+        result = str(hex(j^key))[2:].zfill(2)
+        if(result == results[i*2:i*2+2]):
+            flag += chr(j)
+            break
+print(flag)
+</code></pre>
+<p>或者逆向</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">result=&#x27;bcfba4d0038d48bd4b00f82796d393dfec&#x27;</span><br><span class="line">list = [47, 138, 127, 57, 117, 188, 51, 143, 17, 84, 42, 135, 76, 105, 28, 169, 25]</span><br><span class="line">de = []</span><br><span class="line">for i in range(len(list)):</span><br><span class="line">    key = (list[i]&gt;&gt;4)+((list[i] &amp; 0xf)&lt;&lt;4)</span><br><span class="line">    de.append(key)</span><br><span class="line">flag = &#x27;&#x27;</span><br><span class="line">for i in range(len(result)//2):</span><br><span class="line">    n = int(result[i*2:(i+1)*2],16)</span><br><span class="line">    flag += chr(n^de[i])</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<h2 id="简简单单的解密"><a href="#简简单单的解密" class="headerlink" title="简简单单的解密"></a>简简单单的解密</h2><p>RC4，但可以爆破</p>
+<pre><code>import base64,urllib.parse
+key = &quot;HereIsFlagggg&quot;
+flag = &#39;&#39;
+enc = &quot;%C2%A6n%C2%87Y%1Ag%3F%C2%A01.%C2%9C%C3%B7%C3%8A%02%C3%80%C2%92W%C3%8C%C3%BA&quot;
+enc = urllib.parse.unquote(enc)
+s_box = list(range(256))
+j = 0
+for i in range(256):
+    j = (j + s_box[i] + ord(key[i % len(key)])) % 256
+    s_box[i], s_box[j] = s_box[j], s_box[i]
+res = []
+i = j = 0
+for s in range(len(enc)):
+    i = (i + 1) % 256
+    j = (j + s_box[i]) % 256
+    s_box[i], s_box[j] = s_box[j], s_box[i]
+    t = (s_box[i] + s_box[j]) % 256
+    k = s_box[t]
+    for ff in range(32,128):
+        if(chr(ff ^ k) == enc[s]):
+            print(chr(ff),end=&#39;&#39;)
+</code></pre>
+<p>or re</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import urllib.parse</span><br><span class="line">key = &quot;HereIsFlagggg&quot;</span><br><span class="line">enc = &#x27;%C2%A6n%C2%87Y%1Ag%3F%C2%A01.%C2%9C%C3%B7%C3%8A%02%C3%80%C2%92W%C3%8C%C3%BA&#x27;</span><br><span class="line">enc = urllib.parse.unquote(enc)</span><br><span class="line">s_box = list(range(256))</span><br><span class="line">j = 0</span><br><span class="line">for i in range(256):</span><br><span class="line">    j = (j + s_box[i] + ord(key[i % len(key)])) % 256</span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">res = []</span><br><span class="line">i = j = 0</span><br><span class="line">for s in enc:</span><br><span class="line">    i = (i + 1) % 256</span><br><span class="line">    j = (j + s_box[i]) % 256</span><br><span class="line">    s_box[i], s_box[j] = s_box[j], s_box[i]</span><br><span class="line">    t = (s_box[i] + s_box[j]) % 256</span><br><span class="line">    k = s_box[t]</span><br><span class="line">    res.append(chr(ord(s) ^ k))</span><br><span class="line">ret = &quot;&quot;.join(res)</span><br><span class="line">print(ret)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="非常简单的逻辑题"><a href="#非常简单的逻辑题" class="headerlink" title="非常简单的逻辑题"></a>非常简单的逻辑题</h2><p>还是爆破，反正每个位不会影响到其他的位，爆，都可以爆</p>
+<pre><code>s = &#39;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&#39;
+results = &#39;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&#39;
+flag = &#39;&#39;
+for i in range(21):
+    for j in range(32,128):
+        s1 = j//17
+        s2 = j%17
+        result = s[(s1+i)%34]+s[-(s2+i+1)%34]
+        if(results[i*2:i*2+2] == result):
+            flag += chr(j)
+            break
+print(flag)
+</code></pre>
+<p>还是可以逆</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s = &#x27;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&#x27;</span><br><span class="line">result = &#x27;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&#x27;</span><br><span class="line">flag=&#x27;&#x27;</span><br><span class="line">for i in range(len(result)//2):</span><br><span class="line">    p = result[i*2:(i+1)*2]</span><br><span class="line">    flag += chr((s.index(p[0])-i)*17+len(s)-s.index(p[1])-i-1)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="fakerandom"><a href="#fakerandom" class="headerlink" title="fakerandom"></a>fakerandom</h2><p>又双叒叕是爆破</p>
+<pre><code>import random
+flag = &#39;xxxxxxxxxxxxxxxxxxxx&#39;  #len=20
+random.seed(1)
+l = []
+for i in range(4):
+    l.append(random.getrandbits(8))
+    print(l)
+result = [201, 8, 198, 68, 131, 152, 186, 136, 13, 130, 190, 112, 251, 93, 212, 1, 31, 214, 116, 244]
+flag = &#39;&#39;
+for i in range(len(l)):
+    random.seed(l[i])
+    for n in range(5):
+        tmp = random.getrandbits(8)
+        for j in range(32,128):
+            tmps = j^tmp
+            if(tmps == result[i*5+n]):
+                flag += chr(j)
+                break
+print(flag)
+</code></pre>
+<p>反着算</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import random</span><br><span class="line">result = [201, 8, 198, 68, 131, 152, 186, 136, 13, 130, 190, 112, 251, 93, 212, 1, 31, 214, 116, 244]</span><br><span class="line">random.seed(1)</span><br><span class="line">l = []</span><br><span class="line">for i in range(4):</span><br><span class="line">    l.append(random.getrandbits(8))</span><br><span class="line">flag = &#x27;&#x27;</span><br><span class="line">for i in range(len(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    for n in range(5):</span><br><span class="line">        flag += chr(result[i*5+n]^random.getrandbits(8))</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="fakebase"><a href="#fakebase" class="headerlink" title="fakebase"></a>fakebase</h2><p>推一下就知道每次都要上一次得到的数*31 + 这次得到的数。<br>然后数的话从密文里得，找索引。<br>但是最后取余得到的数不知道是多少，没有输出，于是爆破（但我当时刚好第一道挑中它且一步步逆，浪费了不少时间）</p>
+<pre><code>s_box = &#39;qwertyuiopasdfghjkzxcvb123456#$&#39;
+import libnum
+s = &quot;u#k4ggia61egegzjuqz12jhfspfkay&quot;
+count = []
+s = s[::-1]
+for i in s:
+    ind = s_box.find(i)
+    count.append(ind)
+print(count)
+flag = 1
+for j in range(31):
+    for i in range(len(count)):
+        if(i==0):
+            flag = j*31 + count[i]
+        else:
+            flag = flag*31 + count[i]
+    print(libnum.n2s(flag))
+</code></pre>
+<p>但是好像还是可以逆的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s_box = &#x27;qwertyuiopasdfghjkzxcvb123456#$&#x27;</span><br><span class="line">s = &#x27;u#k4ggia61egegzjuqz12jhfspfkay&#x27;</span><br><span class="line">s = s[::-1]</span><br><span class="line">ret = 3</span><br><span class="line">for i in range(len(s)):</span><br><span class="line">    m = s_box.index(s[i])</span><br><span class="line">    ret = ret*31+m</span><br><span class="line">ret = str(bin(ret))[2:]</span><br><span class="line">if len(ret)%8 != 0:</span><br><span class="line">    ret = ret.zfill(len(ret)+8-len(ret)%8)</span><br><span class="line">result = &#x27;&#x27;</span><br><span class="line">for i in range(0,len(ret)//8):</span><br><span class="line">    result += chr(int(ret[8*i:8*(i+1)],2))</span><br><span class="line"></span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="re1-re2"><a href="#re1-re2" class="headerlink" title="re1 re2"></a>re1 re2</h2><p>都很常规，一个是换字符，一个是位移</p>
+<hr>
+<h1 id="easyapp"><a href="#easyapp" class="headerlink" title="easyapp"></a>easyapp</h1><p>安装应用查看可知是一个输入flag判断对错的简单app</p>
+<p>随便选择一个反编译dex的工具 反编译dex 转java可知</p>
+<p>有3个关键的类 使用工具转java代码可知</p>
+<ul>
+<li>Encoder</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Encoder &#123;</span><br><span class="line">    private int key = 0x075bcd15;</span><br><span class="line"></span><br><span class="line">    public Encoder() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String encode(String str) &#123;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        for (char c : str.toCharArray()) &#123;</span><br><span class="line">            sb.append((char) (c ^ this.key));</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析代码 可知这是一个异或函数 把字符串的每一位和 key 异或</p>
+<ul>
+<li>MainActivity</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">protected void onCreate(Bundle bundle) &#123;</span><br><span class="line">        MainActivity.super.onCreate(bundle);</span><br><span class="line">        setContentView(0x7f0b001c);</span><br><span class="line">        encoder = new Encoder();</span><br><span class="line">        mainActlvity = new MainActlvity();</span><br><span class="line">        ((Button) findViewById(0x7f080057)).setOnClickListener(new -$.Lambda.MainActivity.i-SDaQT6aGr2btgF05Lf-fvXXSo(this, (EditText) findViewById(0x7f080090)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void lambda$onCreate$0$MainActivity(EditText editText, View view) &#123;</span><br><span class="line">        System.out.println(encoder.encode(editText.getText().toString()));</span><br><span class="line">        if (encoder.encode(editText.getText().toString()).equals(&quot;棿棢棢棲棥棷棊棐棁棚棨棨棵棢棌&quot;)) &#123;</span><br><span class="line">            Toast.makeText(this, &quot;YES&quot;, 0).show();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            Toast.makeText(this, &quot;NO&quot;, 0).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析代码 可知 用户输入经过 Encode 之后 和 一个静态字符串比较</p>
+<p><strong>如果仔细分析一下代码 可知 在创建时 调用了MainActlvity</strong></p>
+<ul>
+<li>MainActlvity</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class MainActlvity &#123;</span><br><span class="line">    public MainActlvity() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Field declaredField = Encoder.class.getDeclaredField(&quot;key&quot;);</span><br><span class="line">            declaredField.setAccessible(true);</span><br><span class="line">            declaredField.set(MainActivity.encoder, 0x3ade68b1);</span><br><span class="line">        &#125; catch (IllegalAccessException | NoSuchFieldException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>分析代码可知 这里把 Encode key 的值掉包成了 <code>0x3ade68b1</code></strong></p>
+<p>综合上述本题其实就是一个最简单的异或 <strong>把 key 掉包了</strong> 如果仔细分析了代码 或者使用动态调试 都能发现</p>
+<p>最后异或一下得出flag <code>NSSCTF&#123;apkYYDS&#125;</code></p>
+]]></content>
+      <tags>
+        <tag>re</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NSSCTF有意思但是好像比较一次性的misc题解</title>
+    <url>/2021/10/26/NSSCTF%E6%9C%89%E6%84%8F%E6%80%9D%E4%BD%86%E6%98%AF%E5%A5%BD%E5%83%8F%E6%AF%94%E8%BE%83%E4%B8%80%E6%AC%A1%E6%80%A7%E7%9A%84misc%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>就可能以后用不上但是还是想记一下</p>
+  <span id="more"></span> 
+
+<h2 id="我的银行卡密码"><a href="#我的银行卡密码" class="headerlink" title="我的银行卡密码"></a>我的银行卡密码</h2><p>首先，弱口令爆破6位数字银行卡密码，然后拿到文本（这里的T1234后面出题人说给错提示了，不过我第一步手机键盘解密就没想出来，记录只是因为古典密码套娃很有意思）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">93 53 63 71 51 63 41 51 83 63 23 23 93 62 61 94 93 71 41 92 41 71 63 41 51 31 83 43 41 21 81 22 21 74 42</span><br><span class="line"></span><br><span class="line">The encryption scheme of next stage is decided by the last  letters.</span><br><span class="line"></span><br><span class="line">T1:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   **@@@@**</span><br><span class="line"></span><br><span class="line">T2:@@@@@@@@@@@@@@@@@@@@@@@@   **@@@@@@@**</span><br><span class="line"></span><br><span class="line">T3:@@@@@@@@@@@@@@@@@   **@@@@@@@**</span><br><span class="line"></span><br><span class="line">T4:@@@@@@@@   **@@@@@@ @@@**</span><br><span class="line"></span><br><span class="line">NSSCTF&#123;REVERSE(**@@@@@@@@**)&#125; </span><br></pre></td></tr></table></figure>
+
+<p>第一层观察数字两个一组第一个数字没有1第二个数字只有1-4第一时间联想的就是手机键盘解密解出来</p>
+<p><strong>YLOPJOGJVOCCYNMZYPGXGPOGJDVIGATBASH</strong></p>
+<p>然后这个时候后面的ATBASH就是提示</p>
+<p>Atbash加密，简单来说A对于Z B对于Y以此类推解密后</p>
+<p><strong>BOLKQLTQELXXBMNABKTCTKLTQWERT</strong></p>
+<p>可以发现末尾是QWERT，那就是对于QWERT键盘加密</p>
+<p>QWERT加密，简单来讲按照键盘排布顺序，从左上到右下重新用ABCDE排序排一次</p>
+<p><strong>XISRASEACSUUXZYKXREVERSE</strong></p>
+<p>然后后面Reverse，其实前面可以看出来是SIx Caesar了不过还是根据题目走一下</p>
+<p><strong>XKYZXUUSCAESARSIX</strong></p>
+<p>是凯撒6，把偏移移正，或者滚一边凯撒都可以看出来一个单词</p>
+<p><strong>RESTROOM</strong></p>
+<p>最后按照题目原本的NSSCTF{REVERSE(<strong>@@@@@@@@</strong>)}</p>
+<p>Reverse一次以及描述中的小写</p>
+<p><strong>NSSCTF{moortser}</strong></p>
+<hr>
+<h2 id="here-is-a-bug"><a href="#here-is-a-bug" class="headerlink" title="here is a bug"></a>here is a bug</h2><p>既然提到的WebShell，那随便找个杀毒软件扫一下，基本就出结果了。</p>
+<p>![here1](<a href="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/here1.png">https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/here1.png</a></p>
+<p>第31行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$pass = &#x27;oh_you_catch_the_bug&#x27;; //angel</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Mooooooooooorse"><a href="#Mooooooooooorse" class="headerlink" title="Mooooooooooorse"></a>Mooooooooooorse</h2><p>经典音频摩斯电码</p>
+<hr>
+<h2 id="zipbomb"><a href="#zipbomb" class="headerlink" title="zipbomb"></a>zipbomb</h2><p>这题直接用手机开，压缩包自动修复了，zip炸弹已经这么拉了吗，所以这里直接搬出题人写的记录一下</p>
+<h3 id="出题人思路"><a href="#出题人思路" class="headerlink" title="出题人思路"></a>出题人思路</h3><p>我其实是想让新生用Binwalk或者Ctrl+F生扒的结果好像这样做的人反而少。。。</p>
+<p><img src="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/ZipBomb1.png" alt="ZipBomb1"></p>
+<p>手动dump或者删掉前面的都行，打开就是flag</p>
+<p><strong>NSSCTF{Z1p_B00m_d1sp0sal}</strong></p>
+<p>至于为什么要那么多的NSSCTF，是因为他的压缩率太低，Hex一看直接明文了，就索性让他强制压缩。</p>
+<h3 id="大佬思路"><a href="#大佬思路" class="headerlink" title="大佬思路"></a>大佬思路</h3><p>这里参考参考<a href="https://wd-ljt.com/go/v1/https://blog.csdn.net/qq_42880719/article/details/120582014">套神</a>的脚本与博客</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import os.path</span><br><span class="line">import zipfile</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">dir_path=&#x27;C:\\Users\\mumuzi\\Desktop\\NSS附件包\\MISC&#x27;</span><br><span class="line">files= os.listdir(dir_path)</span><br><span class="line">newfiles = [&quot;zipbomb.zip&quot;]</span><br><span class="line">print(newfiles)</span><br><span class="line">setee = []</span><br><span class="line">for file in newfiles: #遍历文件夹</span><br><span class="line">    position = dir_path+&#x27;\\&#x27;+ file #构造绝对路径，&quot;\\&quot;，其中一个&#x27;\&#x27;为转义符</span><br><span class="line">    print (position)</span><br><span class="line">    z = zipfile.ZipFile(position, &#x27;r&#x27;)</span><br><span class="line">    for filename in z.namelist():</span><br><span class="line">        bytes = z.read(filename)</span><br><span class="line">        if b&#x27;NSSCTF&#123;&#x27; in bytes:</span><br><span class="line">            print(filename)</span><br></pre></td></tr></table></figure>
+
+<p>直接搜flag毕竟都是NSSCTF开头的。这里有个小坑点（其实原本是想将0304改一下让他融入到压缩包里面，但是又觉得太过分，以及虽然融进去了会出点问题）他这个找到的文件里面并不在zipbomb里面而是在zipbomb后面的压缩包里面。</p>
+<h3 id="非预期"><a href="#非预期" class="headerlink" title="非预期"></a>非预期</h3><p>部分手机和压缩软件会直接省略压缩率过高的然后打开就是flag光速白给。</p>
+<hr>
+<h2 id="gif好像有点大"><a href="#gif好像有点大" class="headerlink" title="gif好像有点大"></a>gif好像有点大</h2><p>在gif里面找一帧二维码 然后扫它</p>
+<hr>
+<h2 id="二维码不止二维码"><a href="#二维码不止二维码" class="headerlink" title="二维码不止二维码"></a>二维码不止二维码</h2><p>二维码套娃</p>
+<p>当时做到mircoQR卡住了，真没见过</p>
+<p>用中国编码和<a href="https://demo.dynamsoft.com/barcode-reader/%E8%BD%AE%E7%9D%80%E8%AF%95%E5%B0%B1%E8%A1%8C">https://demo.dynamsoft.com/barcode-reader/轮着试就行</a></p>
+<hr>
+<h2 id="Minecraft的那些事"><a href="#Minecraft的那些事" class="headerlink" title="Minecraft的那些事"></a>Minecraft的那些事</h2><p>官方手法，进入Minecraft Wiki官网</p>
+<p><a href="https://wd-ljt.com/go/v1/https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki</a></p>
+<p>直接搜索二维码，你会看到15w14a的愚人节版本快照，进去一眼就可以看到flag</p>
+<p><img src="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/Minecraft.png" alt="Minecraft"></p>
+<p>扫描后得到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Minecraft 1.9: The Combat Update</span><br></pre></td></tr></table></figure>
+
+<p>md5后就是flag了NSSCTF{47b6c4d68f6cd92ee5f15b59c05b68f7}</p>
+<hr>
+<h2 id="Minecraft-Wiki的那些事"><a href="#Minecraft-Wiki的那些事" class="headerlink" title="Minecraft Wiki的那些事"></a>Minecraft Wiki的那些事</h2><p>概括一下，出题人当过mcwiki巡查，上任官博被他转过，flag大概在那</p>
+<p>所以要找出题人的微博</p>
+<p>然后题目放出的时候出题人的转发微博被夹了，一道白给的osint就突然扑朔迷离难度++++，但是就是能做</p>
+<p>我是可以通过看那条微博的点赞用户找到人，也可以看新点赞的用户里新加的关注</p>
+<p>但是好像也可以在确认目标后百度出题人的ID，然后找到博客，再找到微博链接</p>
+]]></content>
+      <tags>
+        <tag>misc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NSSCTFCrypto部分题解</title>
+    <url>/2021/10/26/NSSCTFCrypto%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>当时对rsa真不熟，装gmpy2库都装不明白，总不能口算rsa吧，不过现在装明白了但是还是不熟</p>
+<span id="more"></span> 
+
+<h2 id="Crypto6"><a href="#Crypto6" class="headerlink" title="Crypto6"></a>Crypto6</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">var=<span class="string">&quot;************************************&quot;</span></span><br><span class="line">flag=<span class="string">&#x27;NSSCTF&#123;&#x27;</span> + base64.b16encode(base64.b32encode(base64.b64encode(var.encode()))) + <span class="string">&#x27;&#125;&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line">小明不小心泄露了源码，输出结果为：4A5A4C564B36434E4B5241544B5432454E4E32465552324E47424758534D44594C4657564336534D4B5241584F574C4B4B463245365643424F35485649534C584A5A56454B4D4B5049354E47593D3D3D，你能还原出var的正确结果吗？</span><br></pre></td></tr></table></figure>
+
+<p>代码逻辑：base64-&gt;base32-&gt;base16，反解即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;4A5A4C564B36434E4B5241544B5432454E4E32465552324E47424758534D44594C4657564336534D4B5241584F574C4B4B463245365643424F35485649534C584A5A56454B4D4B5049354E47593D3D3D&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(b64decode(b32decode(b16decode(<span class="built_in">str</span>.encode()))))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Crypto7"><a href="#Crypto7" class="headerlink" title="Crypto7"></a>Crypto7</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">69f7906323b4f7d1e4e972acf4abfbfc,得到的结果用NSSCTF&#123;&#125;包裹。</span><br></pre></td></tr></table></figure>
+
+<p>字符串长度32位，很容易想到为MD5，也确实是md5</p>
+<hr>
+<h2 id="Crypto8"><a href="#Crypto8" class="headerlink" title="Crypto8"></a>Crypto8</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">73E-30U1&amp;&gt;V-H965S95]I&lt;U]P;W=E&lt;GT`</span><br></pre></td></tr></table></figure>
+
+<p>这里用的是uucode，我用了ciphey才知道</p>
+<p>也可以用php的convert_uudecode() 函数解密。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&quot;73E-30U1&amp;&gt;V-H965S95]I&lt;U]P;W=E&lt;GT`&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> convert_uudecode(<span class="variable">$str</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Crypto9"><a href="#Crypto9" class="headerlink" title="Crypto9"></a>Crypto9</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">AKKPLX&#123;qv5x0021-7n8w-wr05-x25w-7882ntu5q984&#125;</span><br><span class="line">脚本给你了，去解吧</span><br><span class="line"></span><br><span class="line">letter_list = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>  <span class="comment"># 字母表</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据输入的key生成key列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Get_KeyList</span>(<span class="params">key</span>):</span></span><br><span class="line">    key_list = []</span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> key:</span><br><span class="line">        key_list.append(<span class="built_in">ord</span>(ch.upper()) - <span class="number">65</span>)</span><br><span class="line">    <span class="keyword">return</span> key_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加密函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Encrypt</span>(<span class="params">plaintext, key_list</span>):</span></span><br><span class="line">    ciphertext = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> plaintext:  <span class="comment"># 遍历明文</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> == i % <span class="built_in">len</span>(key_list):</span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ch.isalpha():  <span class="comment"># 明文是否为字母,如果是,则判断大小写,分别进行加密</span></span><br><span class="line">            <span class="keyword">if</span> ch.isupper():</span><br><span class="line">                ciphertext += letter_list[(<span class="built_in">ord</span>(ch) - <span class="number">65</span> + key_list[i]) % <span class="number">26</span>]</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ciphertext += letter_list[(<span class="built_in">ord</span>(ch) - <span class="number">97</span> + key_list[i]) % <span class="number">26</span>].lower()</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果密文不为字母,直接添加到密文字符串里</span></span><br><span class="line">            ciphertext += ch</span><br><span class="line">    <span class="keyword">return</span> ciphertext</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Decrypt</span>(<span class="params">ciphertext, key</span>):</span></span><br><span class="line">    plaintext = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> ch <span class="keyword">in</span> ciphertext:  <span class="comment"># 遍历密文</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> == i % <span class="built_in">len</span>(key_list):</span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ch.isalpha():  <span class="comment"># 密文为否为字母,如果是,则判断大小写,分别进行解密</span></span><br><span class="line">            <span class="keyword">if</span> ch.isupper():</span><br><span class="line">                plaintext += letter_list[(<span class="built_in">ord</span>(ch) - <span class="number">65</span> - key_list[i]) % <span class="number">26</span>]</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                plaintext += letter_list[(<span class="built_in">ord</span>(ch) - <span class="number">97</span> - key_list[i]) % <span class="number">26</span>].lower()</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果密文不为字母,直接添加到明文字符串里</span></span><br><span class="line">            plaintext += ch</span><br><span class="line">    <span class="keyword">return</span> plaintext</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;加密请按D,解密请按E:&quot;</span>)</span><br><span class="line">    user_input = <span class="built_in">input</span>();</span><br><span class="line">    <span class="keyword">while</span> (user_input != <span class="string">&#x27;D&#x27;</span> <span class="keyword">and</span> user_input != <span class="string">&#x27;E&#x27;</span>):  <span class="comment"># 输入合法性判断</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;输入有误!请重新输入:&quot;</span>)</span><br><span class="line">        user_input = <span class="built_in">input</span>()</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请输入密钥:&quot;</span>)</span><br><span class="line">    key = <span class="built_in">input</span>()</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">False</span> == key.isalpha()):  <span class="comment"># 输入合法性判断</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;输入有误!密钥为字母,请重新输入:&quot;</span>)</span><br><span class="line">        key = <span class="built_in">input</span>()</span><br><span class="line"></span><br><span class="line">    key_list = Get_KeyList(key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> user_input == <span class="string">&#x27;D&#x27;</span>:</span><br><span class="line">        <span class="comment"># 加密</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请输入明文:&quot;</span>)</span><br><span class="line">        plaintext = <span class="built_in">input</span>()</span><br><span class="line">        ciphertext = Encrypt(plaintext, key_list)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;密文为:\n%s&quot;</span> % ciphertext)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 解密</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请输入密文:&quot;</span>)</span><br><span class="line">        ciphertext = <span class="built_in">input</span>()</span><br><span class="line">        plaintext = Decrypt(ciphertext, key_list)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;明文为:\n%s&quot;</span> % plaintext)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>脚本给我了，但是密钥没线索，所以没做，后面看了看，原来密钥靠猜，是NSS</p>
+<hr>
+<h2 id="Crypto10"><a href="#Crypto10" class="headerlink" title="Crypto10"></a>Crypto10</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">AFFPGS&#123;pbatenghyngvbaf!!!&#125;,建议直接秒了</span><br></pre></td></tr></table></figure>
+
+<p>我当时是一位一位慢慢移的</p>
+<p>但这题其实是ROT18，ROT家族介绍如下：</p>
+<p>ROT5 是 rotate by 5 places 的简写，意思是旋转5个位置，其它皆同。下面分别说说它们的编码方式： </p>
+<p><strong>ROT5</strong>：只对数字进行编码，用当前数字往前数的第5个数字替换当前数字，例如当前为0，编码后变成5，当前为1，编码后变成6，以此类推顺序循环。 </p>
+<p><strong>ROT13</strong>：只对字母进行编码，用当前字母往前数的第13个字母替换当前字母，例如当前为A，编码后变成N，当前为B，编码后变成O，以此类推顺序循环。 </p>
+<p><strong>ROT18</strong>：这是一个异类，本来没有，它是将ROT5和ROT13组合在一起，为了好称呼，将其命名为ROT18。 <strong>ROT47</strong>：对数字、字母、常用符号进行编码，按照它们的ASCII值进行位置替换，用当前字符ASCII值往前数的第47位对应字符替换当前字符，例如当前为小写字母z，编码后变成大写字母K，当前为数字0，编码后变成符号_。用于ROT47编码的字符其ASCII值范围是33－126，具体可参考<a href="https://wd-ljt.com/go/v1/https://www.qqxiuzi.cn/bianma/ascii.htm">ASCII编码</a>。</p>
+<hr>
+<h2 id="ez-caesar"><a href="#ez-caesar" class="headerlink" title="ez_caesar"></a>ez_caesar</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar</span>(<span class="params">plaintext</span>):</span></span><br><span class="line">    str_list = <span class="built_in">list</span>(plaintext)</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(plaintext):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str_list[i].isalpha():</span><br><span class="line">            str_list[i] = str_list[i]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            a = <span class="string">&quot;A&quot;</span> <span class="keyword">if</span> str_list[i].isupper() <span class="keyword">else</span> <span class="string">&quot;a&quot;</span></span><br><span class="line">            str_list[i] = <span class="built_in">chr</span>((<span class="built_in">ord</span>(str_list[i]) - <span class="built_in">ord</span>(a) + <span class="number">5</span>) % <span class="number">26</span> + <span class="built_in">ord</span>(a) <span class="keyword">or</span> <span class="number">5</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(str_list)</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;*************************&quot;</span></span><br><span class="line"><span class="built_in">str</span> = caesar(flag)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#str=&quot;U1hYSFlLe2R0em1mYWpwc3RiaGZqeGZ3fQ==&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这题是对凯撒密码的加密过程魔改了一下，在移位的时候</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">str_list[i] = chr((ord(str_list[i]) - ord(a) + 5) % 26 + ord(a) or 5)</span><br></pre></td></tr></table></figure>
+
+<p>与5做了一次或运算，所以解密的时候需要再将字符与5做一次或运算</p>
+<p>可以base64解码之后再位移</p>
+<p>或者用抄来的exp:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">caesar</span>(<span class="params">plaintext</span>):</span></span><br><span class="line">    str_list = <span class="built_in">list</span>(plaintext)</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(plaintext):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str_list[i].isalpha():</span><br><span class="line">            str_list[i] = str_list[i]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            a = <span class="string">&quot;A&quot;</span> <span class="keyword">if</span> str_list[i].isupper() <span class="keyword">else</span> <span class="string">&quot;a&quot;</span></span><br><span class="line">            str_list[i] = <span class="built_in">chr</span>((<span class="built_in">ord</span>(str_list[i]) - <span class="built_in">ord</span>(a) + <span class="number">21</span>) % <span class="number">26</span> + <span class="built_in">ord</span>(a) <span class="keyword">or</span> <span class="number">5</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(str_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;U1hYSFlLe2R0em1mYWpwc3RiaGZqeGZ3fQ==&quot;</span></span><br><span class="line">res = caesar(<span class="built_in">str</span>(base64.b64decode(str1), <span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（说实话密码学的这个加密要比隔壁re区的加密友好呢）</p>
+<hr>
+<h2 id="ez-rsa"><a href="#ez-rsa" class="headerlink" title="ez_rsa"></a>ez_rsa</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">p = 1325465431</span><br><span class="line">q = 152317153</span><br><span class="line">e = 65537</span><br><span class="line">计算出d,将d用MD5加密后包裹NSSCTF&#123;&#125;提交</span><br></pre></td></tr></table></figure>
+
+<p>一道可算是对得起ez的rsa，直接上exp。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extended_enclid</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        x, y = extended_enclid(b, a % b)</span><br><span class="line">        <span class="keyword">return</span> y, x - a // b * y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = <span class="number">1325465431</span></span><br><span class="line">q = <span class="number">152317153</span></span><br><span class="line">n = p * q</span><br><span class="line">piN = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(extended_enclid(e, piN))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>将求出来的正整数解43476042047970113用MD5加密后包裹NSSCTF{}即可得到正确的flag。</p>
+<p>NSSCTF{08bb8fb628da85923e5734a75ac19ffe}</p>
+<h2 id="pigpig"><a href="#pigpig" class="headerlink" title="pigpig"></a>pigpig</h2><p>猪圈密码，对照密码表解密即可得flag。</p>
+<p>NSSCTF{whenthepigwanttoeat}</p>
+<h2 id="traditional"><a href="#traditional" class="headerlink" title="traditional"></a>traditional</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">西方的二进制数学的发明者莱布尼茨，从中国的八卦图当中受到启发，演绎并推论出了数学矩</span><br><span class="line">阵，</span><br><span class="line">最后创造的二进制数学。二进制数学的诞生为计算机的发明奠定了理论基础。而计算机现在改</span><br><span class="line">变</span><br><span class="line">了我们整个世界，改变了我们生活，而他的源头却是来自于八卦图。现在，给你一组由八卦图</span><br><span class="line">方位</span><br><span class="line">组成的密文，你能破解出其中的含义吗？</span><br><span class="line"> 震坤艮 震艮震 坤巽坤 坤巽震 震巽兑 震艮震 震离艮 震离艮</span><br><span class="line"> 格式：flag&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>读完题目后，能想到这道题肯定与八卦图有关，于是我们去网上搜索一张八卦图出来,再根据题目八卦图与二进制的关系，（然后我把10弄反了最后没做出来挺可惜的）观察八卦图，发现每个方位的符号只有一条杠、两条杠两种表现形式,所以试试看把两条杠当作0，一条杠当作1，转换过来是这样的乾：7 巽：6 坎：2 艮：4 坤：0 震：1 离：5兑：3 。再与上面的密文对应，得到 104 141 60 61 163 141 154 154 因为每个方位只能表示三位二进制数所以最大值为7，</p>
+<p>推测得到的数字是八进制数，转换成10进制得到 68 97 48 49 115 97 108 108 。</p>
+<p>看到这些数字，我们很容易联想到ascll码，我们把它转换成字符看看。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&#x27;68 97 48 49 115 97 108 108&#x27;</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">s1 = s.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s1:</span><br><span class="line">    <span class="built_in">sum</span> += <span class="built_in">chr</span>(<span class="built_in">int</span>(i))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到正确的flag。</p>
+]]></content>
+      <tags>
+        <tag>crypto</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NSSCTF的web部分题解且整理了一下官方给出的多种解法且有还没仔细了解但是想先记着的知识点</title>
+    <url>/2021/10/26/NSSCTF%E7%9A%84web%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3%E4%B8%94%E6%95%B4%E7%90%86%E4%BA%86%E4%B8%80%E4%B8%8B%E5%AE%98%E6%96%B9%E7%BB%99%E5%87%BA%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A7%A3%E6%B3%95%E4%B8%94%E6%9C%89%E8%BF%98%E6%B2%A1%E4%BB%94%E7%BB%86%E4%BA%86%E8%A7%A3%E4%BD%86%E6%98%AF%E6%83%B3%E5%85%88%E8%AE%B0%E7%9D%80%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>NSSCTF 虽然只会做白给的题，但官方wp看了还是有收获的</p>
+<span id="more"></span> 
+
+<h2 id="1-gift-f12"><a href="#1-gift-f12" class="headerlink" title="1.gift_f12"></a>1.gift_f12</h2><p>F12 ctrl+U view-source或者右键</p>
+<p>都能找得到flag</p>
+<hr>
+<h2 id="2-caidao"><a href="#2-caidao" class="headerlink" title="2.caidao"></a>2.caidao</h2><p>一句话木马直接给了</p>
+<p><img src="https://i.loli.net/2021/10/26/On5vYGLutQbXdPz.png" alt="Q.png"></p>
+<p>但是还是有值得记录的东西的</p>
+<h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>蚁剑连接，在根目录或者用终端cat flag</p>
+<h4 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h4><p>直接用hacker进行post传参，执行php代码，在php中有很多函数都可以执行linux下的命令，如说像 system、exec、shell_exec、 passthru 等等都可以，然后linux比较常见的命令有： ls 遍历目录， cd 切换目录， cat 读取文件等等，在linux下 / 代表根目录</p>
+<p><code>wllm=system(&quot;ls /&quot;)</code></p>
+<p>就可以历遍根目录</p>
+<hr>
+<h2 id="3-jicao"><a href="#3-jicao" class="headerlink" title="3.jicao"></a>3.jicao</h2><p>总之就是post一个数据，get一个数据，但是这个get是我不会的基操</p>
+<p><img src="https://i.loli.net/2021/10/26/3A9erlxFzdYfU2p.png" alt="T.png"></p>
+<p>好，现在是我现在会了的基操</p>
+<p><img src="https://i.loli.net/2021/10/26/TNHaGBhP38ApYk9.png" alt="VK.png"></p>
+<p><img src="https://i.loli.net/2021/10/26/DuIBfMUvLJ2ARmc.png" alt="AJ.png"></p>
+<hr>
+<h2 id="4-easy-md5"><a href="#4-easy-md5" class="headerlink" title="4.easy_md5"></a>4.easy_md5</h2><p>就经典的把md5加密后的0e当科学计数法看作0所以相等</p>
+<p>找找md5加密过后0e开头的不同字符串就行</p>
+<p>但是还能用数组绕过</p>
+<p>可以让name[]=0 password[]=1</p>
+<hr>
+<h2 id="5-easyrce"><a href="#5-easyrce" class="headerlink" title="5.easyrce"></a>5.easyrce</h2><p>get传参且带eval</p>
+<p>且没有过滤</p>
+<p>看看当前目录 看看根目录 找到flag 然后cat即可</p>
+<hr>
+<h2 id="6-unserialize"><a href="#6-unserialize" class="headerlink" title="6.unserialize"></a>6.unserialize</h2><p>所有php里面的值都可以使用函数serialize()来返回⼀个包含字节流的字符串来表示。unserialize() </p>
+<p>函数能够重新把字符串变回php原来的值。 序列化⼀个对象将会保存对象的所有变量，但是不会保 </p>
+<p>存对象的方法，只会保存类的名字。（所以反序列化的危害在于我们可以控制对象的变量来改变程序 </p>
+<p>执行流程来达到我们的目的） </p>
+<p>控制了变量，我们还需要让他参与到流程里面，所以还要了解魔术方法</p>
+<p>序列化和反序列化</p>
+<p><a href="https://www.php.net/manual/zh/language.oop5.serialization.php">https://www.php.net/manual/zh/language.oop5.serialization.php</a> </p>
+<p>魔术方法 </p>
+<p><a href="https://www.php.net/manual/zh/language.oop5.serialization.php">https://www.php.net/manual/zh/language.oop5.serialization.php</a></p>
+<p>但是其实这俩链接还没仔细看，先记在这</p>
+]]></content>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>鲲鹏杯miscwp</title>
     <url>/2021/10/18/%E9%B2%B2%E9%B9%8F%E6%9D%AFmiscwp/</url>
     <content><![CDATA[<h1 id="鲲鹏杯-misc-wp"><a href="#鲲鹏杯-misc-wp" class="headerlink" title="鲲鹏杯 misc wp"></a>鲲鹏杯 misc wp</h1><p>我也不知道这几题到底是misc几，我拿到的只有文件，登不上，怎么都登不上，然后有些试探步骤就不写了，因为忘了</p>

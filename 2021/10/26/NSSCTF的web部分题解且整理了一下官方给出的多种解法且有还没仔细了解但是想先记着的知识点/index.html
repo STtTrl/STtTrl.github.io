@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    NSSCTF的web部分题解且整理了一下官方给出的多种解法且有还没仔细了解但是想先记着的知识点 |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-NSSCTF的web部分题解且整理了一下官方给出的多种解法且有还没仔细了解但是想先记着的知识点" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  NSSCTF的web部分题解且整理了一下官方给出的多种解法且有还没仔细了解但是想先记着的知识点
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/26/NSSCTF%E7%9A%84web%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3%E4%B8%94%E6%95%B4%E7%90%86%E4%BA%86%E4%B8%80%E4%B8%8B%E5%AE%98%E6%96%B9%E7%BB%99%E5%87%BA%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A7%A3%E6%B3%95%E4%B8%94%E6%9C%89%E8%BF%98%E6%B2%A1%E4%BB%94%E7%BB%86%E4%BA%86%E8%A7%A3%E4%BD%86%E6%98%AF%E6%83%B3%E5%85%88%E8%AE%B0%E7%9D%80%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time datetime="2021-10-26T01:00:00.000Z" itemprop="datePublished">2021-10-26</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>NSSCTF 虽然只会做白给的题，但官方wp看了还是有收获的</p>
+<span id="more"></span> 
+
+<h2 id="1-gift-f12"><a href="#1-gift-f12" class="headerlink" title="1.gift_f12"></a>1.gift_f12</h2><p>F12 ctrl+U view-source或者右键</p>
+<p>都能找得到flag</p>
+<hr>
+<h2 id="2-caidao"><a href="#2-caidao" class="headerlink" title="2.caidao"></a>2.caidao</h2><p>一句话木马直接给了</p>
+<p><img src="https://i.loli.net/2021/10/26/On5vYGLutQbXdPz.png" alt="Q.png"></p>
+<p>但是还是有值得记录的东西的</p>
+<h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>蚁剑连接，在根目录或者用终端cat flag</p>
+<h4 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h4><p>直接用hacker进行post传参，执行php代码，在php中有很多函数都可以执行linux下的命令，如说像 system、exec、shell_exec、 passthru 等等都可以，然后linux比较常见的命令有： ls 遍历目录， cd 切换目录， cat 读取文件等等，在linux下 / 代表根目录</p>
+<p><code>wllm=system(&quot;ls /&quot;)</code></p>
+<p>就可以历遍根目录</p>
+<hr>
+<h2 id="3-jicao"><a href="#3-jicao" class="headerlink" title="3.jicao"></a>3.jicao</h2><p>总之就是post一个数据，get一个数据，但是这个get是我不会的基操</p>
+<p><img src="https://i.loli.net/2021/10/26/3A9erlxFzdYfU2p.png" alt="T.png"></p>
+<p>好，现在是我现在会了的基操</p>
+<p><img src="https://i.loli.net/2021/10/26/TNHaGBhP38ApYk9.png" alt="VK.png"></p>
+<p><img src="https://i.loli.net/2021/10/26/DuIBfMUvLJ2ARmc.png" alt="AJ.png"></p>
+<hr>
+<h2 id="4-easy-md5"><a href="#4-easy-md5" class="headerlink" title="4.easy_md5"></a>4.easy_md5</h2><p>就经典的把md5加密后的0e当科学计数法看作0所以相等</p>
+<p>找找md5加密过后0e开头的不同字符串就行</p>
+<p>但是还能用数组绕过</p>
+<p>可以让name[]=0 password[]=1</p>
+<hr>
+<h2 id="5-easyrce"><a href="#5-easyrce" class="headerlink" title="5.easyrce"></a>5.easyrce</h2><p>get传参且带eval</p>
+<p>且没有过滤</p>
+<p>看看当前目录 看看根目录 找到flag 然后cat即可</p>
+<hr>
+<h2 id="6-unserialize"><a href="#6-unserialize" class="headerlink" title="6.unserialize"></a>6.unserialize</h2><p>所有php里面的值都可以使用函数serialize()来返回⼀个包含字节流的字符串来表示。unserialize() </p>
+<p>函数能够重新把字符串变回php原来的值。 序列化⼀个对象将会保存对象的所有变量，但是不会保 </p>
+<p>存对象的方法，只会保存类的名字。（所以反序列化的危害在于我们可以控制对象的变量来改变程序 </p>
+<p>执行流程来达到我们的目的） </p>
+<p>控制了变量，我们还需要让他参与到流程里面，所以还要了解魔术方法</p>
+<p>序列化和反序列化</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.serialization.php">https://www.php.net/manual/zh/language.oop5.serialization.php</a> </p>
+<p>魔术方法 </p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.serialization.php">https://www.php.net/manual/zh/language.oop5.serialization.php</a></p>
+<p>但是其实这俩链接还没仔细看，先记在这</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/26/NSSCTF%E7%9A%84web%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3%E4%B8%94%E6%95%B4%E7%90%86%E4%BA%86%E4%B8%80%E4%B8%8B%E5%AE%98%E6%96%B9%E7%BB%99%E5%87%BA%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A7%A3%E6%B3%95%E4%B8%94%E6%9C%89%E8%BF%98%E6%B2%A1%E4%BB%94%E7%BB%86%E4%BA%86%E8%A7%A3%E4%BD%86%E6%98%AF%E6%83%B3%E5%85%88%E8%AE%B0%E7%9D%80%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" data-id="ckv7mub980008sww16q3k4dxj" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/10/26/NSSCTFCrypto%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      NSSCTFCrypto部分题解
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/10/18/%E9%B2%B2%E9%B9%8F%E6%9D%AFmiscwp/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">鲲鹏杯miscwp</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

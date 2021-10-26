@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    NSSCTF有意思但是好像比较一次性的misc题解 |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-NSSCTF有意思但是好像比较一次性的misc题解" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  NSSCTF有意思但是好像比较一次性的misc题解
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/26/NSSCTF%E6%9C%89%E6%84%8F%E6%80%9D%E4%BD%86%E6%98%AF%E5%A5%BD%E5%83%8F%E6%AF%94%E8%BE%83%E4%B8%80%E6%AC%A1%E6%80%A7%E7%9A%84misc%E9%A2%98%E8%A7%A3/" class="article-date">
+  <time datetime="2021-10-26T01:55:48.000Z" itemprop="datePublished">2021-10-26</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>就可能以后用不上但是还是想记一下</p>
+  <span id="more"></span> 
+
+<h2 id="我的银行卡密码"><a href="#我的银行卡密码" class="headerlink" title="我的银行卡密码"></a>我的银行卡密码</h2><p>首先，弱口令爆破6位数字银行卡密码，然后拿到文本（这里的T1234后面出题人说给错提示了，不过我第一步手机键盘解密就没想出来，记录只是因为古典密码套娃很有意思）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">93 53 63 71 51 63 41 51 83 63 23 23 93 62 61 94 93 71 41 92 41 71 63 41 51 31 83 43 41 21 81 22 21 74 42</span><br><span class="line"></span><br><span class="line">The encryption scheme of next stage is decided by the last  letters.</span><br><span class="line"></span><br><span class="line">T1:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   **@@@@**</span><br><span class="line"></span><br><span class="line">T2:@@@@@@@@@@@@@@@@@@@@@@@@   **@@@@@@@**</span><br><span class="line"></span><br><span class="line">T3:@@@@@@@@@@@@@@@@@   **@@@@@@@**</span><br><span class="line"></span><br><span class="line">T4:@@@@@@@@   **@@@@@@ @@@**</span><br><span class="line"></span><br><span class="line">NSSCTF&#123;REVERSE(**@@@@@@@@**)&#125; </span><br></pre></td></tr></table></figure>
+
+<p>第一层观察数字两个一组第一个数字没有1第二个数字只有1-4第一时间联想的就是手机键盘解密解出来</p>
+<p><strong>YLOPJOGJVOCCYNMZYPGXGPOGJDVIGATBASH</strong></p>
+<p>然后这个时候后面的ATBASH就是提示</p>
+<p>Atbash加密，简单来说A对于Z B对于Y以此类推解密后</p>
+<p><strong>BOLKQLTQELXXBMNABKTCTKLTQWERT</strong></p>
+<p>可以发现末尾是QWERT，那就是对于QWERT键盘加密</p>
+<p>QWERT加密，简单来讲按照键盘排布顺序，从左上到右下重新用ABCDE排序排一次</p>
+<p><strong>XISRASEACSUUXZYKXREVERSE</strong></p>
+<p>然后后面Reverse，其实前面可以看出来是SIx Caesar了不过还是根据题目走一下</p>
+<p><strong>XKYZXUUSCAESARSIX</strong></p>
+<p>是凯撒6，把偏移移正，或者滚一边凯撒都可以看出来一个单词</p>
+<p><strong>RESTROOM</strong></p>
+<p>最后按照题目原本的NSSCTF{REVERSE(<strong>@@@@@@@@</strong>)}</p>
+<p>Reverse一次以及描述中的小写</p>
+<p><strong>NSSCTF{moortser}</strong></p>
+<hr>
+<h2 id="here-is-a-bug"><a href="#here-is-a-bug" class="headerlink" title="here is a bug"></a>here is a bug</h2><p>既然提到的WebShell，那随便找个杀毒软件扫一下，基本就出结果了。</p>
+<p>![here1](<a target="_blank" rel="noopener" href="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/here1.png">https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/here1.png</a></p>
+<p>第31行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$pass = &#x27;oh_you_catch_the_bug&#x27;; //angel</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Mooooooooooorse"><a href="#Mooooooooooorse" class="headerlink" title="Mooooooooooorse"></a>Mooooooooooorse</h2><p>经典音频摩斯电码</p>
+<hr>
+<h2 id="zipbomb"><a href="#zipbomb" class="headerlink" title="zipbomb"></a>zipbomb</h2><p>这题直接用手机开，压缩包自动修复了，zip炸弹已经这么拉了吗，所以这里直接搬出题人写的记录一下</p>
+<h3 id="出题人思路"><a href="#出题人思路" class="headerlink" title="出题人思路"></a>出题人思路</h3><p>我其实是想让新生用Binwalk或者Ctrl+F生扒的结果好像这样做的人反而少。。。</p>
+<p><img src="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/ZipBomb1.png" alt="ZipBomb1"></p>
+<p>手动dump或者删掉前面的都行，打开就是flag</p>
+<p><strong>NSSCTF{Z1p_B00m_d1sp0sal}</strong></p>
+<p>至于为什么要那么多的NSSCTF，是因为他的压缩率太低，Hex一看直接明文了，就索性让他强制压缩。</p>
+<h3 id="大佬思路"><a href="#大佬思路" class="headerlink" title="大佬思路"></a>大佬思路</h3><p>这里参考参考<a target="_blank" rel="noopener" href="https://wd-ljt.com/go/v1/https://blog.csdn.net/qq_42880719/article/details/120582014">套神</a>的脚本与博客</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import os.path</span><br><span class="line">import zipfile</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">dir_path=&#x27;C:\\Users\\mumuzi\\Desktop\\NSS附件包\\MISC&#x27;</span><br><span class="line">files= os.listdir(dir_path)</span><br><span class="line">newfiles = [&quot;zipbomb.zip&quot;]</span><br><span class="line">print(newfiles)</span><br><span class="line">setee = []</span><br><span class="line">for file in newfiles: #遍历文件夹</span><br><span class="line">    position = dir_path+&#x27;\\&#x27;+ file #构造绝对路径，&quot;\\&quot;，其中一个&#x27;\&#x27;为转义符</span><br><span class="line">    print (position)</span><br><span class="line">    z = zipfile.ZipFile(position, &#x27;r&#x27;)</span><br><span class="line">    for filename in z.namelist():</span><br><span class="line">        bytes = z.read(filename)</span><br><span class="line">        if b&#x27;NSSCTF&#123;&#x27; in bytes:</span><br><span class="line">            print(filename)</span><br></pre></td></tr></table></figure>
+
+<p>直接搜flag毕竟都是NSSCTF开头的。这里有个小坑点（其实原本是想将0304改一下让他融入到压缩包里面，但是又觉得太过分，以及虽然融进去了会出点问题）他这个找到的文件里面并不在zipbomb里面而是在zipbomb后面的压缩包里面。</p>
+<h3 id="非预期"><a href="#非预期" class="headerlink" title="非预期"></a>非预期</h3><p>部分手机和压缩软件会直接省略压缩率过高的然后打开就是flag光速白给。</p>
+<hr>
+<h2 id="gif好像有点大"><a href="#gif好像有点大" class="headerlink" title="gif好像有点大"></a>gif好像有点大</h2><p>在gif里面找一帧二维码 然后扫它</p>
+<hr>
+<h2 id="二维码不止二维码"><a href="#二维码不止二维码" class="headerlink" title="二维码不止二维码"></a>二维码不止二维码</h2><p>二维码套娃</p>
+<p>当时做到mircoQR卡住了，真没见过</p>
+<p>用中国编码和<a target="_blank" rel="noopener" href="https://demo.dynamsoft.com/barcode-reader/%E8%BD%AE%E7%9D%80%E8%AF%95%E5%B0%B1%E8%A1%8C">https://demo.dynamsoft.com/barcode-reader/轮着试就行</a></p>
+<hr>
+<h2 id="Minecraft的那些事"><a href="#Minecraft的那些事" class="headerlink" title="Minecraft的那些事"></a>Minecraft的那些事</h2><p>官方手法，进入Minecraft Wiki官网</p>
+<p><a target="_blank" rel="noopener" href="https://wd-ljt.com/go/v1/https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki</a></p>
+<p>直接搜索二维码，你会看到15w14a的愚人节版本快照，进去一眼就可以看到flag</p>
+<p><img src="https://wdljt-img.oss-cn-shanghai.aliyuncs.com/NSSCTF/Image/Minecraft.png" alt="Minecraft"></p>
+<p>扫描后得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Minecraft 1.9: The Combat Update</span><br></pre></td></tr></table></figure>
+
+<p>md5后就是flag了NSSCTF{47b6c4d68f6cd92ee5f15b59c05b68f7}</p>
+<hr>
+<h2 id="Minecraft-Wiki的那些事"><a href="#Minecraft-Wiki的那些事" class="headerlink" title="Minecraft Wiki的那些事"></a>Minecraft Wiki的那些事</h2><p>概括一下，出题人当过mcwiki巡查，上任官博被他转过，flag大概在那</p>
+<p>所以要找出题人的微博</p>
+<p>然后题目放出的时候出题人的转发微博被夹了，一道白给的osint就突然扑朔迷离难度++++，但是就是能做</p>
+<p>我是可以通过看那条微博的点赞用户找到人，也可以看新点赞的用户里新加的关注</p>
+<p>但是好像也可以在确认目标后百度出题人的ID，然后找到博客，再找到微博链接</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/26/NSSCTF%E6%9C%89%E6%84%8F%E6%80%9D%E4%BD%86%E6%98%AF%E5%A5%BD%E5%83%8F%E6%AF%94%E8%BE%83%E4%B8%80%E6%AC%A1%E6%80%A7%E7%9A%84misc%E9%A2%98%E8%A7%A3/" data-id="ckv7mub970005sww16bry25m5" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/" rel="tag">misc</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/10/27/NSSCTFReverse%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%BD%86%E5%B0%B1%E6%8C%BA%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%9A%84/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      NSSCTFReverse题解，但就挺加密解密的
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/10/26/NSSCTFCrypto%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">NSSCTFCrypto部分题解</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

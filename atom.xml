@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>塔纳利斯之沙</title>
-  
+  <icon>http://example.com/icon.png</icon>
   
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-10-17T14:10:42.624Z</updated>
+  <updated>2021-10-26T05:11:43.973Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSSCTFReverse题解，但就挺加密解密的</title>
+    <link href="http://example.com/2021/10/27/NSSCTFReverse%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%BD%86%E5%B0%B1%E6%8C%BA%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%9A%84/"/>
+    <id>http://example.com/2021/10/27/NSSCTFReverse%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%BD%86%E5%B0%B1%E6%8C%BA%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%9A%84/</id>
+    <published>2021-10-27T01:22:17.000Z</published>
+    <updated>2021-10-26T05:11:43.973Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;首先，做了2道附件给程序的简单常见的re，然后剩下了一堆，python脚本，打开一看全是加密呢，并且刚好挑了一道需要爆破才能解的，逆了半天放弃了，难顶，然后我看wp的时候发现这种题爆破确实好用，有时候逆着算确实花时间&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="re" scheme="http://example.com/tags/re/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSSCTF有意思但是好像比较一次性的misc题解</title>
+    <link href="http://example.com/2021/10/26/NSSCTF%E6%9C%89%E6%84%8F%E6%80%9D%E4%BD%86%E6%98%AF%E5%A5%BD%E5%83%8F%E6%AF%94%E8%BE%83%E4%B8%80%E6%AC%A1%E6%80%A7%E7%9A%84misc%E9%A2%98%E8%A7%A3/"/>
+    <id>http://example.com/2021/10/26/NSSCTF%E6%9C%89%E6%84%8F%E6%80%9D%E4%BD%86%E6%98%AF%E5%A5%BD%E5%83%8F%E6%AF%94%E8%BE%83%E4%B8%80%E6%AC%A1%E6%80%A7%E7%9A%84misc%E9%A2%98%E8%A7%A3/</id>
+    <published>2021-10-26T01:55:48.000Z</published>
+    <updated>2021-10-25T18:20:29.502Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;就可能以后用不上但是还是想记一下&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="misc" scheme="http://example.com/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSSCTFCrypto部分题解</title>
+    <link href="http://example.com/2021/10/26/NSSCTFCrypto%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/"/>
+    <id>http://example.com/2021/10/26/NSSCTFCrypto%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</id>
+    <published>2021-10-26T01:37:24.000Z</published>
+    <updated>2021-10-25T17:49:59.977Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;当时对rsa真不熟，装gmpy2库都装不明白，总不能口算rsa吧，不过现在装明白了但是还是不熟&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="crypto" scheme="http://example.com/tags/crypto/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSSCTF的web部分题解且整理了一下官方给出的多种解法且有还没仔细了解但是想先记着的知识点</title>
+    <link href="http://example.com/2021/10/26/NSSCTF%E7%9A%84web%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3%E4%B8%94%E6%95%B4%E7%90%86%E4%BA%86%E4%B8%80%E4%B8%8B%E5%AE%98%E6%96%B9%E7%BB%99%E5%87%BA%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A7%A3%E6%B3%95%E4%B8%94%E6%9C%89%E8%BF%98%E6%B2%A1%E4%BB%94%E7%BB%86%E4%BA%86%E8%A7%A3%E4%BD%86%E6%98%AF%E6%83%B3%E5%85%88%E8%AE%B0%E7%9D%80%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>http://example.com/2021/10/26/NSSCTF%E7%9A%84web%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3%E4%B8%94%E6%95%B4%E7%90%86%E4%BA%86%E4%B8%80%E4%B8%8B%E5%AE%98%E6%96%B9%E7%BB%99%E5%87%BA%E7%9A%84%E5%A4%9A%E7%A7%8D%E8%A7%A3%E6%B3%95%E4%B8%94%E6%9C%89%E8%BF%98%E6%B2%A1%E4%BB%94%E7%BB%86%E4%BA%86%E8%A7%A3%E4%BD%86%E6%98%AF%E6%83%B3%E5%85%88%E8%AE%B0%E7%9D%80%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/</id>
+    <published>2021-10-26T01:00:00.000Z</published>
+    <updated>2021-10-26T05:12:26.590Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;NSSCTF 虽然只会做白给的题，但官方wp看了还是有收获的&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="web" scheme="http://example.com/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>鲲鹏杯miscwp</title>
