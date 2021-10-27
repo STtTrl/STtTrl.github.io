@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-10-26T05:11:43.973Z</updated>
+  <updated>2021-10-27T14:13:46.569Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2021ISCTFmiscwp，要么题白给，要么我白给</title>
+    <link href="http://example.com/2021/10/28/2021ISCTFmiscwp%EF%BC%8C%E8%A6%81%E4%B9%88%E9%A2%98%E7%99%BD%E7%BB%99%EF%BC%8C%E8%A6%81%E4%B9%88%E6%88%91%E7%99%BD%E7%BB%99/"/>
+    <id>http://example.com/2021/10/28/2021ISCTFmiscwp%EF%BC%8C%E8%A6%81%E4%B9%88%E9%A2%98%E7%99%BD%E7%BB%99%EF%BC%8C%E8%A6%81%E4%B9%88%E6%88%91%E7%99%BD%E7%BB%99/</id>
+    <published>2021-10-27T21:02:29.000Z</published>
+    <updated>2021-10-27T14:13:46.569Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;总结一下，会做的题很快白给，不会的好歹长了见识&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="misc" scheme="http://example.com/tags/misc/"/>
+    
+  </entry>
   
   <entry>
     <title>NSSCTFReverse题解，但就挺加密解密的</title>

