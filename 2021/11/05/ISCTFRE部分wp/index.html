@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    ISCTFRE部分wp |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-ISCTFRE部分wp" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  ISCTFRE部分wp
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/05/ISCTFRE%E9%83%A8%E5%88%86wp/" class="article-date">
+  <time datetime="2021-11-04T22:18:58.000Z" itemprop="datePublished">2021-11-04</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>虽然这是新生赛，但re我很多题没做出来，有没见过的语言，有静态分析下看的人都麻了的加密，有很多变量放在一起配上非常大的数字，所以学到很多，赚了</p>
+<span id="more"></span> 
+
+<h2 id="re签到"><a href="#re签到" class="headerlink" title="re签到"></a>re签到</h2><p>这题给的附件被upx压缩后，又把upx标志改了，没法直接upx -d</p>
+<p><img src="https://i.loli.net/2021/11/04/gmpdfM8RsEhvI4Z.png" alt="XRT.png"></p>
+<p>所以得用手动脱壳</p>
+<p>或者把upx标志从RPX改回去</p>
+<p>然后进ida分析就完事了</p>
+<hr>
+<h2 id="GAME"><a href="#GAME" class="headerlink" title="GAME"></a>GAME</h2><p>是一个用unity写的游戏，应该正常通不了关</p>
+<p>这题很有意思，很多解法，但是我对这种文件不熟，结束了才通过各种问人才了解到</p>
+<p>unity的游戏可以直接找Assembly-CSharp.dll 文件，大部分的逻辑都在</p>
+<p><img src="https://i.loli.net/2021/11/04/a2wIPDrGdLZRESV.png" alt="DGQ.png"></p>
+<p>用dnspy打开该文件</p>
+<p><img src="https://i.loli.net/2021/11/04/OwJ57K4C3kX1tcN.png" alt="3.png"></p>
+<p>直接定位到主要逻辑</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Security.Cryptography;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.Events;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Token: 0x0200000E RID: 14</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScoreAndFlag</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Token: 0x06000032 RID: 50 RVA: 0x0000226A File Offset: 0x0000046A</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.scoreTxt.text = <span class="keyword">this</span>.score.<span class="built_in">ToString</span>() + <span class="string">&quot;/100000&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000033 RID: 51 RVA: 0x00002A2C File Offset: 0x00000C2C</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.score &gt;= <span class="number">100000</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>.WinPanel.<span class="built_in">SetActive</span>(<span class="literal">true</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (Input.<span class="built_in">GetKeyDown</span>(KeyCode.Escape))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>.exitBtn.onClick.<span class="built_in">AddListener</span>(<span class="keyword">new</span> <span class="built_in">UnityAction</span>(<span class="keyword">this</span>.ExitGame));</span><br><span class="line">			<span class="keyword">this</span>.exitPanel.<span class="built_in">SetActive</span>(<span class="literal">true</span>);</span><br><span class="line">			<span class="keyword">this</span>.backBtn.onClick.<span class="built_in">AddListener</span>(<span class="keyword">new</span> <span class="built_in">UnityAction</span>(<span class="keyword">this</span>.BackToGame));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000034 RID: 52 RVA: 0x00002A9C File Offset: 0x00000C9C</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ScoreAdd</span><span class="params">(<span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.score += value;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.score &lt;= <span class="number">100000</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>.scoreGoal++;</span><br><span class="line">			<span class="keyword">this</span>.EC.waitTime /= <span class="number">1.2f</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.score &gt;= <span class="number">100000</span> &amp;&amp; <span class="keyword">this</span>.scoreGoal &gt;= <span class="number">300</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">this</span>.f1ag.text = <span class="string">&quot;ISCTF&#123;&quot;</span> + ScoreAndFlag.<span class="built_in">md5</span>(ScoreAndFlag.<span class="built_in">SHA1</span>(<span class="string">&quot;2010&quot;</span>)) + <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">this</span>.scoreTxt.text = <span class="keyword">this</span>.score.<span class="built_in">ToString</span>() + <span class="string">&quot;/100000&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000035 RID: 53 RVA: 0x0000228C File Offset: 0x0000048C</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> string <span class="title">SHA1</span><span class="params">(string content)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ScoreAndFlag.<span class="built_in">SHA1</span>(content, Encoding.UTF8);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000036 RID: 54 RVA: 0x00002B44 File Offset: 0x00000D44</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> string <span class="title">SHA1</span><span class="params">(string content, Encoding encode)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		string result;</span><br><span class="line">		<span class="keyword">try</span></span><br><span class="line">		&#123;</span><br><span class="line">			SHA1CryptoServiceProvider sha1CryptoServiceProvider = <span class="keyword">new</span> <span class="built_in">SHA1CryptoServiceProvider</span>();</span><br><span class="line">			byte[] bytes = encode.<span class="built_in">GetBytes</span>(content);</span><br><span class="line">			byte[] value = sha1CryptoServiceProvider.<span class="built_in">ComputeHash</span>(bytes);</span><br><span class="line">			sha1CryptoServiceProvider.<span class="built_in">Dispose</span>();</span><br><span class="line">			result = BitConverter.<span class="built_in">ToString</span>(value).<span class="built_in">Replace</span>(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="built_in">ToUpper</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in"><span class="keyword">catch</span></span> (Exception ex)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&quot;SHA1加密出错：&quot;</span> + ex.Message);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000037 RID: 55 RVA: 0x00002BB0 File Offset: 0x00000DB0</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> string <span class="title">md5</span><span class="params">(string str)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		byte[] bytes = Encoding.UTF8.<span class="built_in">GetBytes</span>(str);</span><br><span class="line">		byte[] array = MD5.<span class="built_in">Create</span>().<span class="built_in">ComputeHash</span>(bytes);</span><br><span class="line">		StringBuilder stringBuilder = <span class="keyword">new</span> <span class="built_in">StringBuilder</span>();</span><br><span class="line">		foreach (byte b in array)</span><br><span class="line">		&#123;</span><br><span class="line">			stringBuilder.<span class="built_in">Append</span>(b.<span class="built_in">ToString</span>(<span class="string">&quot;X2&quot;</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> stringBuilder.<span class="built_in">ToString</span>().<span class="built_in">Substring</span>(<span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000038 RID: 56 RVA: 0x00002299 File Offset: 0x00000499</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ExitGame</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Application.<span class="built_in">Quit</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x06000039 RID: 57 RVA: 0x000022A0 File Offset: 0x000004A0</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">BackToGame</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.exitPanel.<span class="built_in">SetActive</span>(<span class="literal">false</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000033 RID: 51</span></span><br><span class="line">	<span class="keyword">public</span> Text scoreTxt;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000034 RID: 52</span></span><br><span class="line">	<span class="keyword">public</span> Text f1ag;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000035 RID: 53</span></span><br><span class="line">	<span class="keyword">public</span> GameObject WinPanel;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000036 RID: 54</span></span><br><span class="line">	<span class="keyword">public</span> GameObject exitPanel;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000037 RID: 55</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> score;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000038 RID: 56</span></span><br><span class="line">	<span class="keyword">public</span> Button exitBtn;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x04000039 RID: 57</span></span><br><span class="line">	<span class="keyword">public</span> Button backBtn;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x0400003A RID: 58</span></span><br><span class="line">	<span class="keyword">public</span> EnemyCreate EC;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Token: 0x0400003B RID: 59</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> scoreGoal = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以直接把加密代码抄下来跑，也可以修改拿到flag的条件</p>
+<p><img src="https://i.loli.net/2021/11/04/cs9nqQVyKGCe5uI.png" alt="7DHX9CV.png"></p>
+<p><img src="https://i.loli.net/2021/11/04/z9Ktfa5SQCpBrog.png" alt="3V.png"></p>
+<hr>
+<h2 id="O0oOoo-level1"><a href="#O0oOoo-level1" class="headerlink" title="O0oOoo-level1"></a><strong>O0oOoo-level1</strong></h2><p>丢进ida，可以看到checkflag函数，然后我发现好多变量，好多数字，我看不懂</p>
+<p>后面知道了这是6组5元一次方程，就能看懂了，还是见识少了</p>
+<p>可以用mathematic跑方程，把唯一一个&gt;&gt;6 改成*64即可</p>
+<p>也可以用z3收束求解，都挺好用，都可以用</p>
+<p>出来的数字ascii码转字符就行</p>
+<hr>
+<h2 id="简单的re"><a href="#简单的re" class="headerlink" title="简单的re"></a>简单的re</h2><p>就很简单，记事本打开即可找到flag</p>
+<hr>
+<h2 id="Reverse-Easy-JAR"><a href="#Reverse-Easy-JAR" class="headerlink" title="Reverse-Easy_JAR"></a><strong>Reverse-Easy_JAR</strong></h2><p>附件是.jar，所以用jadx打开，可以很清晰地看到是用base64解码后和ctf异或，当时对python异或不熟，对c语言base64不熟，写脚本写了好久没成功，后面用CyberChef才弄好</p>
+<p>然后看别人的wp居然还能用php写逆向脚本，tql</p>
+<hr>
+<ul>
+<li><p>能复现的都在这里了，web都是没什么必要记录的简单题，pwn我能做出来的也是没什么必要记录的。</p>
+</li>
+<li><p>写这篇的时候找了个人组队做题，有人讨论，分享做出题目的激动的感觉还是不错的，比一个人好多了。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/05/ISCTFRE%E9%83%A8%E5%88%86wp/" data-id="ckvl2iak70000p4w18zcdht1b" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/re/" rel="tag">re</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/11/05/ISCTFandroidwp/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">ISCTFandroidwp</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
