@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ISCTFandroidwp</title>
+    <url>/2021/11/05/ISCTFandroidwp/</url>
+    <content><![CDATA[<p>只出了2道且都挺简单的安卓逆向</p>
+<span id="more"></span> 
+
+<h2 id="猜数字"><a href="#猜数字" class="headerlink" title="猜数字"></a><strong>猜数字</strong></h2><p>安装一下，看到就是让猜数字，flag随机给</p>
+<p>用JADX打开，定位 tk.mcsog.isctfgetflag 函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private String flag1 = &quot;ISCT&quot;;</span><br><span class="line">private String flag10 = &quot;2f70&quot;;</span><br><span class="line">private String flag11 = &quot;7b&#125;&quot;;</span><br><span class="line">private String flag2 = &quot;F&#123;5e&quot;;</span><br><span class="line">private String flag3 = &quot;c072&quot;;</span><br><span class="line">private String flag4 = &quot;15-7&quot;; </span><br><span class="line">private String flag5 = &quot;16f-&quot;;</span><br><span class="line">private String flag6 = &quot;498a&quot;;</span><br><span class="line">private String flag7 = &quot;-85a&quot;;</span><br><span class="line">private String flag8 = &quot;d-5f&quot;;</span><br><span class="line">private String flag9 = &quot;3932&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这些，拼起来就是flag</p>
+<p>ISCTF{5ec07215-716f-498a-85ad-5f39322f707b} </p>
+<p>这题甚至还能直接看smali，可以找到按顺序排好但还是很多段的flag</p>
+<hr>
+<h2 id="锁机病毒"><a href="#锁机病毒" class="headerlink" title="锁机病毒"></a><strong>锁机病毒</strong></h2><p>JADX打开，定位到 tk.mcsog.isctflock 函数</p>
+<p>但是没直接看到什么东西</p>
+<p>那再看看.so依赖库，可以看到一个函数是</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> __cdecl <span class="title">Java_tk_mcsog_isctflock_MainActivity_check</span><span class="params">(<span class="keyword">int</span> a1, <span class="keyword">int</span> a2, <span class="keyword">int</span> a3)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"> <span class="keyword">const</span> <span class="keyword">char</span> *v3; <span class="comment">// esi </span></span><br><span class="line"> <span class="keyword">bool</span> v5; <span class="comment">// [esp+Bh] [ebp-11h] </span></span><br><span class="line"> v3 = (<span class="keyword">const</span> <span class="keyword">char</span> *)(*(<span class="built_in"><span class="keyword">int</span></span> (__cdecl **)(<span class="keyword">int</span>, <span class="keyword">int</span>, _DWORD))(*(_DWORD *)a1 + <span class="number">676</span>))(a1, a3, <span class="number">0</span>); </span><br><span class="line"> v5 = <span class="built_in">strcmp</span>(<span class="string">&quot;173572&quot;</span>, v3) == <span class="number">0</span>; </span><br><span class="line"> (*(<span class="built_in"><span class="keyword">void</span></span> (__cdecl **)(<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">const</span> <span class="keyword">char</span> *))(*(_DWORD *)a1 + <span class="number">680</span>))(a1, a3, v3);</span><br><span class="line"> <span class="keyword">return</span> v5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>安装一下，发现原来就输个密码就行</p>
+<p>173572就是密码</p>
+<p><img src="https://i.loli.net/2021/11/04/TgPUC1oIW7yziRZ.png" alt="5HR0.png"></p>
+<hr>
+<ul>
+<li>这个android就很新生赛，这比赛隔壁re的0解题拿着wp我都复现不动</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>2021ISCTFmiscwp，要么题白给，要么我白给</title>
     <url>/2021/10/28/2021ISCTFmiscwp%EF%BC%8C%E8%A6%81%E4%B9%88%E9%A2%98%E7%99%BD%E7%BB%99%EF%BC%8C%E8%A6%81%E4%B9%88%E6%88%91%E7%99%BD%E7%BB%99/</url>
     <content><![CDATA[<p>总结一下，会做的题很快白给，不会的好歹长了见识</p>

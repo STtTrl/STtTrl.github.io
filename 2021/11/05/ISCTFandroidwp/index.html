@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    ISCTFandroidwp |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-ISCTFandroidwp" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  ISCTFandroidwp
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/05/ISCTFandroidwp/" class="article-date">
+  <time datetime="2021-11-04T21:58:09.000Z" itemprop="datePublished">2021-11-04</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>只出了2道且都挺简单的安卓逆向</p>
+<span id="more"></span> 
+
+<h2 id="猜数字"><a href="#猜数字" class="headerlink" title="猜数字"></a><strong>猜数字</strong></h2><p>安装一下，看到就是让猜数字，flag随机给</p>
+<p>用JADX打开，定位 tk.mcsog.isctfgetflag 函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private String flag1 = &quot;ISCT&quot;;</span><br><span class="line">private String flag10 = &quot;2f70&quot;;</span><br><span class="line">private String flag11 = &quot;7b&#125;&quot;;</span><br><span class="line">private String flag2 = &quot;F&#123;5e&quot;;</span><br><span class="line">private String flag3 = &quot;c072&quot;;</span><br><span class="line">private String flag4 = &quot;15-7&quot;; </span><br><span class="line">private String flag5 = &quot;16f-&quot;;</span><br><span class="line">private String flag6 = &quot;498a&quot;;</span><br><span class="line">private String flag7 = &quot;-85a&quot;;</span><br><span class="line">private String flag8 = &quot;d-5f&quot;;</span><br><span class="line">private String flag9 = &quot;3932&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这些，拼起来就是flag</p>
+<p>ISCTF{5ec07215-716f-498a-85ad-5f39322f707b} </p>
+<p>这题甚至还能直接看smali，可以找到按顺序排好但还是很多段的flag</p>
+<hr>
+<h2 id="锁机病毒"><a href="#锁机病毒" class="headerlink" title="锁机病毒"></a><strong>锁机病毒</strong></h2><p>JADX打开，定位到 tk.mcsog.isctflock 函数</p>
+<p>但是没直接看到什么东西</p>
+<p>那再看看.so依赖库，可以看到一个函数是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> __cdecl <span class="title">Java_tk_mcsog_isctflock_MainActivity_check</span><span class="params">(<span class="keyword">int</span> a1, <span class="keyword">int</span> a2, <span class="keyword">int</span> a3)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"> <span class="keyword">const</span> <span class="keyword">char</span> *v3; <span class="comment">// esi </span></span><br><span class="line"> <span class="keyword">bool</span> v5; <span class="comment">// [esp+Bh] [ebp-11h] </span></span><br><span class="line"> v3 = (<span class="keyword">const</span> <span class="keyword">char</span> *)(*(<span class="built_in"><span class="keyword">int</span></span> (__cdecl **)(<span class="keyword">int</span>, <span class="keyword">int</span>, _DWORD))(*(_DWORD *)a1 + <span class="number">676</span>))(a1, a3, <span class="number">0</span>); </span><br><span class="line"> v5 = <span class="built_in">strcmp</span>(<span class="string">&quot;173572&quot;</span>, v3) == <span class="number">0</span>; </span><br><span class="line"> (*(<span class="built_in"><span class="keyword">void</span></span> (__cdecl **)(<span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">const</span> <span class="keyword">char</span> *))(*(_DWORD *)a1 + <span class="number">680</span>))(a1, a3, v3);</span><br><span class="line"> <span class="keyword">return</span> v5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>安装一下，发现原来就输个密码就行</p>
+<p>173572就是密码</p>
+<p><img src="https://i.loli.net/2021/11/04/TgPUC1oIW7yziRZ.png" alt="5HR0.png"></p>
+<hr>
+<ul>
+<li>这个android就很新生赛，这比赛隔壁re的0解题拿着wp我都复现不动</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/05/ISCTFandroidwp/" data-id="ckvl14e0v0004asw1csms6dol" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/10/28/2021ISCTFmiscwp%EF%BC%8C%E8%A6%81%E4%B9%88%E9%A2%98%E7%99%BD%E7%BB%99%EF%BC%8C%E8%A6%81%E4%B9%88%E6%88%91%E7%99%BD%E7%BB%99/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">2021ISCTFmiscwp，要么题白给，要么我白给</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
