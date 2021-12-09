@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-11-04T14:54:33.076Z</updated>
+  <updated>2021-12-09T10:26:13.049Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>些许关于tea加密算法的记录</title>
+    <link href="http://example.com/2021/12/10/%E4%BA%9B%E8%AE%B8%E5%85%B3%E4%BA%8Etea%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E8%AE%B0%E5%BD%95/"/>
+    <id>http://example.com/2021/12/10/%E4%BA%9B%E8%AE%B8%E5%85%B3%E4%BA%8Etea%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E8%AE%B0%E5%BD%95/</id>
+    <published>2021-12-09T18:01:23.000Z</published>
+    <updated>2021-12-09T10:26:13.049Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;​    最近虽然仍然在不断学习，但似乎没有多少值得总结的东西，于是尝试记录一下常见但是非常不熟的tea加密算法&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="re tea" scheme="http://example.com/tags/re-tea/"/>
+    
+  </entry>
   
   <entry>
     <title>ISCTFRE部分wp</title>

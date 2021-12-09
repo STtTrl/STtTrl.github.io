@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <title>
+    些许关于tea加密算法的记录 |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-些许关于tea加密算法的记录" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  些许关于tea加密算法的记录
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/10/%E4%BA%9B%E8%AE%B8%E5%85%B3%E4%BA%8Etea%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2021-12-09T18:01:23.000Z" itemprop="datePublished">2021-12-09</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>​    最近虽然仍然在不断学习，但似乎没有多少值得总结的东西，于是尝试记录一下常见但是非常不熟的tea加密算法</p>
+  <span id="more"></span>     
+
+<hr>
+<h2 id="TEA算法简介"><a href="#TEA算法简介" class="headerlink" title="TEA算法简介"></a>TEA算法简介</h2><p>TEA（Tiny Encryption Algorithm）是一种分组加密算法，它的实现非常简单，通常只需要很精短的几行代码。TEA 算法最初是由剑桥计算机实验室的 David Wheeler 和 Roger Needham 在 1994 年设计的。</p>
+<p>TEA 算法使用 64 位的明文分组和 128 位的密钥，它使用 Feistel 分组加密框架，建议的迭代次数为 32 轮。该算法使用了一个常数 δ 作为倍数，它来源于黄金比率，以保证每一轮加密都不相同。但 δ 的精确值似乎并不重要，这里 TEA 把它定义为 δ=「(√5 - 1)231」（也就是程序中的 0×9E3779B9）。</p>
+<p>之后 TEA 算法被发现存在缺陷，作为回应，设计者提出了一个 TEA 的升级版本——XTEA（有时也被称为“tean”）。XTEA 跟 TEA 使用了相同的简单运算，但它采用了截然不同的顺序，为了阻止密钥表攻击，四个子密钥（在加密过程中，原 128 位的密钥被拆分为 4 个 32 位的子密钥）采用了一种不太正规的方式进行混合，但速度更慢了。</p>
+<hr>
+<h2 id="具体算法"><a href="#具体算法" class="headerlink" title="具体算法"></a>具体算法</h2><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>总之就是明文和密钥进入32轮（算法发明者推荐32轮，有时会变）循环，得到最后的64位密文</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Encrypt</span><span class="params">(<span class="keyword">long</span>* EntryData, <span class="keyword">long</span>* Key)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">    <span class="comment">//总共加密32轮</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        sum += delta;</span><br><span class="line">        x += ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">        y += ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">    EntryData[<span class="number">0</span>] = x;</span><br><span class="line">    EntryData[<span class="number">1</span>] = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><p>​    加密是</p>
+<p>x+=公式</p>
+<p>y+=公式</p>
+<p>并循环32次</p>
+<p>​    因为公式为异或公式，所以解密不用改内容，直接</p>
+<p>y-=公式</p>
+<p>x-=公式</p>
+<p>并循环32次</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Decrypt</span><span class="params">(<span class="keyword">long</span>* EntryData, <span class="keyword">long</span>* Key)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">    sum = delta &lt;&lt; <span class="number">5</span>;   <span class="comment">//注意这里,sum = 32轮之后的黄金分割值. 因为我们要反序解密.</span></span><br><span class="line">    <span class="comment">//总共加密32轮 那么反序也解密32轮</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 先将y解开 然后参与运算在解x</span></span><br><span class="line">        y -= ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">        x -= ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">    EntryData[<span class="number">0</span>] = x;</span><br><span class="line">    EntryData[<span class="number">1</span>] = y;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p>如果是没被魔改过的tea，可以用这个脚本加解密</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Encrypt</span><span class="params">(<span class="keyword">long</span>* EntryData, <span class="keyword">long</span>* Key)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">    <span class="comment">//总共加密32轮</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        sum += delta;</span><br><span class="line">        x += ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">        y += ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">    EntryData[<span class="number">0</span>] = x;</span><br><span class="line">    EntryData[<span class="number">1</span>] = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Decrypt</span><span class="params">(<span class="keyword">long</span>* EntryData, <span class="keyword">long</span>* Key)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//分别加密数组中的前四个字节与后4个字节,4个字节为一组每次加密两组</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> x = EntryData[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> y = EntryData[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">    sum = delta &lt;&lt; <span class="number">5</span>;   <span class="comment">//注意这里,sum = 32轮之后的黄金分割值. 因为我们要反序解密.</span></span><br><span class="line">    <span class="comment">//总共加密32轮 那么反序也解密32轮</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 先将y解开 然后参与运算在解x</span></span><br><span class="line">        y -= ((x &lt;&lt; <span class="number">4</span>) + Key[<span class="number">2</span>]) ^ (x + sum) ^ ((x &gt;&gt; <span class="number">5</span>) + Key[<span class="number">3</span>]);</span><br><span class="line">        x -= ((y &lt;&lt; <span class="number">4</span>) + Key[<span class="number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="number">5</span>) + Key[<span class="number">1</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后加密的结果重新写入到数组中</span></span><br><span class="line">    EntryData[<span class="number">0</span>] = x;</span><br><span class="line">    EntryData[<span class="number">1</span>] = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> Data[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;  <span class="comment">//明文，必须是8字节的倍数，不够需要程序补全，参考base64方法</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;待加密的数值：%d %d\n&quot;</span>,Data[<span class="number">0</span>],Data[<span class="number">1</span>]);  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">long</span> key[<span class="number">4</span>] = &#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;   <span class="comment">//密钥随便</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//Encrypt每次只是加密4字节数组中的两组(也就是每次加密8个字节) 如果你数据多.可以来个for循环来循环加密,但是Entrypt内部还有32次循环,所以速度上还是会有点影响.</span></span><br><span class="line">    Encrypt(Data, key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密后的数值：%d %d\n&quot;</span>,Data[<span class="number">0</span>],Data[<span class="number">1</span>]);</span><br><span class="line">    Decrypt(Data, key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;解密后的数值：%d %d\&quot;,Data[0],Data[1]);</span></span><br><span class="line"><span class="string">    system(&quot;</span>pause<span class="string">&quot;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="xtea"><a href="#xtea" class="headerlink" title="xtea"></a>xtea</h2><p>​    tea的升级版，加密逻辑、公式有变化，每轮用于加密的key有变化，不是很了解，先放个加解密脚本在这</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">encrypt</span><span class="params">(<span class="keyword">uint32_t</span>* v, <span class="keyword">uint32_t</span>* key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> sum = <span class="number">0</span>, delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++) &#123;</span><br><span class="line">        v0 += (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">        sum += delta;</span><br><span class="line">        v1 += (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    v[<span class="number">0</span>]=v0;</span><br><span class="line">    v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">decrypt</span><span class="params">(<span class="keyword">uint32_t</span>* v, <span class="keyword">uint32_t</span>* key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> v0 = v[<span class="number">0</span>], v1 = v[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> delta = <span class="number">0x9E3779B9</span>;</span><br><span class="line">    <span class="keyword">uint32_t</span> sum = delta * <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++) &#123;</span><br><span class="line">        v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">        v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    v[<span class="number">0</span>]=v0;</span><br><span class="line">    v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 两个32位无符号整数，即待加密的64bit明文数据</span></span><br><span class="line">    <span class="keyword">uint32_t</span> v[<span class="number">2</span>] = &#123;<span class="number">0x12345678</span>, <span class="number">0x78563412</span>&#125;;</span><br><span class="line">    <span class="comment">// 四个32位无符号整数，即128bit的key</span></span><br><span class="line">    <span class="keyword">uint32_t</span> k[<span class="number">4</span>]= &#123;<span class="number">0x1</span>, <span class="number">0x2</span>, <span class="number">0x3</span>, <span class="number">0x4</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Data is : %x %x\n&quot;</span>, v[<span class="number">0</span>], v[<span class="number">1</span>]);</span><br><span class="line">    encrypt(v, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Encrypted data is : %x %x\n&quot;</span>, v[<span class="number">0</span>], v[<span class="number">1</span>]);</span><br><span class="line">    decrypt(v, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Decrypted data is : %x %x\n&quot;</span>, v[<span class="number">0</span>], v[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Data is : 12345678 78563412</span></span><br><span class="line"><span class="comment">Encrypted data is : ae685ec7 59af4238</span></span><br><span class="line"><span class="comment">Decrypted data is : 12345678 78563412</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>tea加密的特征，大概就是多轮次公式异或，更多情况下是修改过的，那就分析一下，改出能用的解密脚本。</p>
+</li>
+<li><p>接触的越多，越觉得有些东西不值得去记录，但是又想告诉别人最近学了啥，那还是放一点在博客上吧。</p>
+</li>
+<li><p>走这条路要学的基础可太多了，好多东西要看，最近身体有点不舒服，学习上有些懈怠。</p>
+</li>
+<li><p>我觉得我还需要了解一些，或者很多，关于开发的知识。</p>
+</li>
+<li><p>希望能每天进步一点点，能在未来做自己想做的事吧。</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/vzJf8DjopeO2kuh.jpg" alt="0B2B7B8D47329CBC568D419A26159427.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/10/%E4%BA%9B%E8%AE%B8%E5%85%B3%E4%BA%8Etea%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E8%AE%B0%E5%BD%95/" data-id="ckwytg5gl000iesw1cg3v6uim" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/re-tea/" rel="tag">re tea</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/11/05/ISCTFRE%E9%83%A8%E5%88%86wp/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">ISCTFRE部分wp</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2021</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
