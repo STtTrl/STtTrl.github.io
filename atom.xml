@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-09T10:26:13.049Z</updated>
+  <updated>2022-01-15T02:02:32.148Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>长安战疫wp</title>
+    <link href="http://example.com/2022/01/09/%E9%95%BF%E5%AE%89%E6%88%98%E7%96%ABwp/"/>
+    <id>http://example.com/2022/01/09/%E9%95%BF%E5%AE%89%E6%88%98%E7%96%ABwp/</id>
+    <published>2022-01-08T17:43:31.000Z</published>
+    <updated>2022-01-15T02:02:32.148Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;他们写的前50%都有参与奖并且面向的是在校大学生，看着就难度合适，我就去看看了，确实有收获，并且难度合适&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>些许关于tea加密算法的记录</title>
