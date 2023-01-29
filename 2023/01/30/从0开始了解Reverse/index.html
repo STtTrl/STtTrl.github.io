@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="Burying time and bugs">
+  
+  <title>
+    从0开始了解Reverse-1 |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-从0开始了解Reverse" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  从0开始了解Reverse-1
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/01/30/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E4%BA%86%E8%A7%A3Reverse/" class="article-date">
+  <time datetime="2023-01-30T00:49:53.000Z" itemprop="datePublished">2023-01-30</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>很多具体的东西就算用到后记下也基本不会有第二次查看，想要尝试记录下基础的东西，尽可能详细，尽可能解释有意义的细节，让0基础也能看懂，顺便以此排查自己对哪些地方掌握不足。当然如果0基础只靠看文章来学的话的话也太无聊了，尽管我还想讲的明白点，但是只有文字多少有点抽象，建议边学边实践。（我也不知道能写到什么程度）</p>
+  <span id="more"></span> 
+
+<h1 id="零-逆向是什么"><a href="#零-逆向是什么" class="headerlink" title="零 逆向是什么"></a>零 逆向是什么</h1><p>​        我试着给出我的答案，逆向工程（Reverse）是通过调试，反汇编，反编译等手段，分析有或没有源码的二进制文件，以此定位功能实现底层细节，了解设计者心理意图的一种方式。</p>
+<p>​        对我来说，能达到了解设计者心理意图这一目的，就能算是逆向吧。不过这里预计只讲上一段提到的传统逆向。</p>
+<h1 id="一-前置知识"><a href="#一-前置知识" class="headerlink" title="一 前置知识"></a>一 前置知识</h1><p>​        好消息是我也不太想从</p>
+<p><em>莱布尼茨在古老《易经》的六十四卦和二进制的数码相对应，给予他极大的启发和鼓舞，并于1705年把论文发表出来，题为《关于仅用0和1两个符号的二进制算术的说明，并以此解释古代中国伏羲图的探讨》</em></p>
+<p>开始讲。</p>
+<h2 id="汇编语言-反汇编-和-反编译"><a href="#汇编语言-反汇编-和-反编译" class="headerlink" title="汇编语言 反汇编 和 反编译"></a>汇编语言 反汇编 和 反编译</h2><p>​        先讲讲对于逆向来说十分重要的反汇编吧，<strong>代码</strong>被<strong>编译</strong>成<strong>程序</strong>，然后程序被计算机执行这一过程，问题来了，明明以文本方式打开.exe是一堆乱码，为什么程序就能被计算机按着代码写的执行呢。因为那些看似代码的东西，有一段是二进制形式的汇编语言对应的<strong>机器码</strong>，用文本编码的方式读没有意义，就像按着英文的意思去理解中文，但实际上英文的句子里也没汉字啊。</p>
+<p>​        上面提到了一个概念，**<u>汇编语言</u><strong>，这种语言可以按规律转化为机器码，比如mov ax,1作为汇编指令的意思是把ax</strong>寄存器**存储的值变成1，这条指令对应的机器码是 EB0100，可以非常方便地存在.exe里，电脑中负责执行的部分能读懂并执行。</p>
+<p>​        <strong>反汇编</strong>就是在.exe存放机器码的地方，找到 EB0100 把他直接换成 mov ax,1，所有的机器码换成汇编指令后，如果熟悉汇编语言，那就能直接知道设计者大概是怎么写的代码了。<strong>反编译</strong>则是根据编译的规律，把汇编指令或者别的机器码还原成原本的代码或是对应的C语言代码。</p>
+<p>​        掌握转换规律需要非常非常多的积累，了解各个API转换成机器码的特征，当然这大部分情况下是反编译引擎做的事，这个时代有IDA Jadx dnspy已经不需要亲手去做，把程序放进去就行，但是这些都是为了后面更好的理解一些东西必须要掌握的知识，是很重要的基础。</p>
+<p>也许需要点图再设计点实践内容，来更好地让人理解这一节，但是这里就先算了。</p>
+<p><strong>代码</strong>（就是给人读的，写的，像print(“Hello word”)，后缀一般是.c .cpp .py .java)</p>
+<p><strong>编译</strong>（一个转化过程，目的是为了把代码变成电脑能执行的东西）</p>
+<p><strong>程序</strong>（一种可以被电脑执行的文件，后缀可以有.exe .apk ，甚至linux系统下有没有后缀问题也不大）</p>
+<p><strong>机器码</strong>（给电脑中CPU（负责执行的部分）读了之后执行的）</p>
+<p><strong>寄存器</strong>（读写效率很高的数据存放区域，可以理解成用起来很快但是数量有限的容器）</p>
+<h1 id="二-静态分析"><a href="#二-静态分析" class="headerlink" title="二 静态分析"></a>二 静态分析</h1><h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>​        静态分析就是试着看懂源码，或者试着看懂反编译出来的像代码一样的东西，反编译引擎能分类出很多很多东西，需要抓住关键，积累技巧。</p>
+<p>​        先讲点理论：整理<strong>函数</strong>在哪引用，<strong>变量</strong>在哪被引用，在哪被变更，找想分析的功能的关键流程，实际上就是看代码，想要高效熟练的话，那就是多看代码。</p>
+<p><strong>函数</strong>（被写在一起的小动作组成的程序的一个大动作)</p>
+<p><strong>变量</strong>（用来存可以修改的数据的东西）</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>​        纯讲理论过于干瘪无力抽象，结合HGAME2023week1中的encode讲讲</p>
+<p>这是个exe文件，双击运行弹出命令行，无论输入什么，这个命令行窗口都会关掉，所以用win+R 运行cmd，拖进去执行，随便输点东西，就会显示输的东西不对。</p>
+<p><img src="https://s2.loli.net/2023/01/30/FoPXliteIJTScyq.png" alt="a.png"></p>
+<p>需要分析分析这玩意代码逻辑怎么写的，才能知道输入什么才是对的。</p>
+<p>如果直接把.exe改成.txt以文本形式查看，会有一些乱码，但也有部分写死的在编译的时候留下来的东西</p>
+<p><img src="https://s2.loli.net/2023/01/30/iguHnaAr4b1LFkw.png" alt="R.png"></p>
+<p>除了编译时候的信息，可以猜到这里的Wrong 和 Yes 是存好的数据</p>
+<p>把它放进IDA分析</p>
+<p>这里刚好分析出的最核心的执行的动作的流程图。</p>
+<p><img src="https://s2.loli.net/2023/01/30/HN98RTp3zaD7AvJ.png" alt="L.png"></p>
+<p>当然也可以    Shift+F12 查找字符串 然后找到Wrong! You are not good at encode 双击，看到存在了.data段，确实放在了数据该在的地方<img src="https://s2.loli.net/2023/01/30/ITkdOuUXGaDxpho.png" alt="Z.png"></p>
+<p>Ctrl+X 查看哪引用了它 ，发现就上面这流程图的地方这一处，IDA有个功能非常强大的插件 Hex-rays</p>
+<p>对着这图按F5 可以直接将这些汇编语言转为c语言，所以能读懂c语言真的很重要</p>
+<p><img src="https://s2.loli.net/2023/01/30/Hxpesu3bLM6ZJWX.png" alt="C7.png"></p>
+<p>那这些sub_xxxx是干啥的呢，也得点进去分析，或者直接猜吧，前面的那个4011A0应该是输入，后面的401160有两处，触发if就会引用Wrong那句话并且结束，v4和dword_403000存的东西如果一样，就能触发Yes。</p>
+<p>v4和输入进去的比经过了什么处理呢，可以看到就上面的偶数位置存的是 输入的东西 &amp; 0xF ，奇数位置存的是 输入的东西右移4位 &amp; 0xF</p>
+<p>显示在屏幕上的字符a，在程序中是以ascii码形式存储，也就是0x61，这玩意在字符它是a，在ascii码用十六进制表示是0x61，用十进制就是97。</p>
+<p>0x61 &amp; 0xF = 1</p>
+<p>(0x61 &gt;&gt; 4 ) &amp; 0xF =6</p>
+<p>按顺序存好会发现 0x61 变成了 0x16</p>
+<p>这就是这里的encode做了哪些处理了</p>
+<p>双击前面要判断比对是否相等的数据，看到了如果输入正确v5应该是的数据</p>
+<p>我的建议是右键首个数据选Array把这段视为数组，然后选定后shift+e提取数据选择hex的表示形式把他复制粘贴下来丢python数组里或者c语言也行。</p>
+<p><img src="https://s2.loli.net/2023/01/30/1ZBOPyiVHnKT2bY.png" alt="XIKM9NB.png"></p>
+<p>可以把0去掉也可以4行代码完事，因为就是举个例子，不是很想把这4行代码说明白。当然如果在认真读的你真不懂我帮你去问了一下</p>
+<p><img src="https://s2.loli.net/2023/01/30/Cq7sunO9kxLdhGN.png" alt="O.png"></p>
+<p>常规的简单的入门级的静态分析顺便逆向一下过程是这样的</p>
+<p>未完待续，感觉讲的太碎太慢了不上不下上不去下不来卡在哪了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/30/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E4%BA%86%E8%A7%A3Reverse/" data-id="cldht8dme000pzkw1gjqoefcx" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/re/" rel="tag">re</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2022/09/01/NSSCTFRoundVre%E5%87%BA%E9%A2%98%E4%BA%BA%E7%AC%94%E8%AE%B0/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">NSSCTFRoundVre出题人笔记</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2023</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

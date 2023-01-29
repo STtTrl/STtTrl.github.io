@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-05T06:42:56.572Z</updated>
+  <updated>2023-01-29T20:03:26.165Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从0开始了解Reverse-1</title>
+    <link href="http://example.com/2023/01/30/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E4%BA%86%E8%A7%A3Reverse/"/>
+    <id>http://example.com/2023/01/30/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E4%BA%86%E8%A7%A3Reverse/</id>
+    <published>2023-01-30T00:49:53.000Z</published>
+    <updated>2023-01-29T20:03:26.165Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;很多具体的东西就算用到后记下也基本不会有第二次查看，想要尝试记录下基础的东西，尽可能详细，尽可能解释有意义的细节，让0基础也能看懂，顺便以此排查自己对哪些地方掌握不足。当然如果0基础只靠看文章来学的话的话也太无聊了，尽管我还想讲的明白点，但是只有文字多少有点抽象，建议边学边实践。（我也不知道能写到什么程度）&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="re" scheme="http://example.com/tags/re/"/>
+    
+  </entry>
   
   <entry>
     <title>NSSCTFRoundVre出题人笔记</title>
@@ -326,25 +343,6 @@
     
     
     <category term="sql" scheme="http://example.com/tags/sql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>尝试编写博客文章</title>
-    <link href="http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
-    <id>http://example.com/2021/09/18/%E5%B0%9D%E8%AF%95%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</id>
-    <published>2021-09-18T12:48:04.000Z</published>
-    <updated>2021-09-20T14:20:40.709Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;尝试编写博客文章&quot;&gt;&lt;a href=&quot;#尝试编写博客文章&quot; class=&quot;headerlink&quot; title=&quot;尝试编写博客文章&quot;&gt;&lt;/a&gt;尝试编写博客文章&lt;/h1&gt;&lt;h2 id=&quot;—-关于Typora快捷键的些许记录&quot;&gt;&lt;a href=&quot;#—-关于Typora快捷键的些许记录&quot; class=&quot;headerlink&quot; title=&quot;—-关于Typora快捷键的些许记录&quot;&gt;&lt;/a&gt;—-关于Typora快捷键的些许记录&lt;/h2&gt;&lt;p&gt;标题 Ctrl+1/2/3 整行对应一二三级标题&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;加粗&lt;/strong&gt; Ctrl+B&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;斜体&lt;/em&gt; Ctrl+I&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Typora" scheme="http://example.com/tags/Typora/"/>
     
   </entry>
   
