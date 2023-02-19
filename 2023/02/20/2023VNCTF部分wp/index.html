@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="Burying time and bugs">
+  
+  <title>
+    2023VNCTF部分wp |
+    
+    塔纳利斯之沙
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="塔纳利斯之沙" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-2023VNCTF部分wp" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  2023VNCTF部分wp
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2023/02/20/2023VNCTF%E9%83%A8%E5%88%86wp/" class="article-date">
+  <time datetime="2023-02-20T04:21:25.000Z" itemprop="datePublished">2023-02-20</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>一场没那么坐牢还能学到东西的CTF正反馈很舒服，而且运气好的话这次的排名应该会有奖品</p>
+<span id="more"></span> 
+
+<p>24 名 misc第4</p>
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="象棋王子"><a href="#象棋王子" class="headerlink" title="象棋王子"></a>象棋王子</h3><p>把胜利后触发的代码抄下来输入控制台，弹出flag</p>
+<p><img src="https://s2.loli.net/2023/02/18/FHV4QIdZtyz1nf5.png" alt="A.png"></p>
+<p><img src="https://s2.loli.net/2023/02/18/YnZbvc6pLyNKsda.png" alt="ET.png"></p>
+<p>This is your flag: flag{w3lc0m3_t0_VNCTF_2023~~~}</p>
+<h2 id="REVERSE"><a href="#REVERSE" class="headerlink" title="REVERSE"></a>REVERSE</h2><h2 id="PZGalaxy"><a href="#PZGalaxy" class="headerlink" title="PZGalaxy"></a>PZGalaxy</h2><p>查看相关代码，一眼RC4 ，抄到python改了一下</p>
+<p><img src="https://s2.loli.net/2023/02/18/vCQOr9ysgNMkUaq.png" alt="38.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">enc = [<span class="string">&#x27;¦&#x27;</span>, <span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;Ü&#x27;</span>, <span class="string">&#x27;\x92&#x27;</span>, <span class="string">&#x27;Ã&#x27;</span>, <span class="string">&#x27;\x97&#x27;</span>, <span class="string">&#x27;ó&#x27;</span>, <span class="string">&#x27;\x1A&#x27;</span>, <span class="string">&#x27;ß&#x27;</span>, <span class="string">&#x27;\b&#x27;</span>, <span class="string">&#x27;Ö&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;5&#x27;</span>, <span class="string">&#x27;\x90&#x27;</span>, <span class="string">&#x27;&#123;&#x27;</span>, <span class="string">&#x27;\x06&#x27;</span>, <span class="string">&#x27;Ô&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;÷&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;\x1D&#x27;</span>, <span class="string">&#x27;:&#x27;</span>, <span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;Ñ&#x27;</span>, <span class="string">&#x27;¹&#x27;</span>, <span class="string">&#x27;O&#x27;</span>, <span class="string">&#x27;\x99&#x27;</span>, <span class="string">&#x27;\x85&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;à&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;|&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Leaf</span>(<span class="params">k, p</span>):</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    s =[<span class="number">0</span>]*<span class="number">256</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    x=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    res=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line"></span><br><span class="line">        s[i] = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (  j + s[i] + <span class="built_in">ord</span>(k[i % <span class="number">8</span>])  ) % <span class="number">256</span></span><br><span class="line">        x = s[i]</span><br><span class="line">        s[i] = s[j]</span><br><span class="line">        s[j] = x</span><br><span class="line"></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(p)):</span><br><span class="line">        i = (i + <span class="number">1</span>) % <span class="number">256</span></span><br><span class="line">        j = (j + s[i]) % <span class="number">256</span></span><br><span class="line">        x = s[i]</span><br><span class="line">        s[i] = s[j]</span><br><span class="line">        s[j] = x</span><br><span class="line">        res += <span class="built_in">chr</span>(<span class="built_in">ord</span>(p[y]) ^ s[(s[i] + s[j]) % <span class="number">256</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">aaa=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>,<span class="number">999</span>): </span><br><span class="line">    date=<span class="string">&#x27;20230&#x27;</span>+<span class="built_in">str</span>(i) <span class="comment">#一开始其实是2023+str(i)4位数，但是没跑出来</span></span><br><span class="line"></span><br><span class="line">    aaa=Leaf(date,enc)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;flag&#x27;</span> <span class="keyword">in</span> aaa:</span><br><span class="line">        <span class="built_in">print</span>(aaa)<span class="comment">#flag&#123;HitYourSoulAndSeeYouInTheGalaxy&#125;</span></span><br><span class="line">        <span class="built_in">print</span>(date)<span class="comment">#20230127</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="babyanti"><a href="#babyanti" class="headerlink" title="babyanti"></a>babyanti</h2><p>​        比赛的时候环境一直闪退就放弃做了，后面看了看可能是模拟器系统不是64位的，赛后仔细看了看代码，又自己试了试，改函数名的相关ascii会导致暂停之后什么都没做都会触发反作弊，锁血用修改器也可以做到，但是等到3000太慢，最后发现暂停之后按继续才有检测，数值有变化才会触发反作弊。所以不暂停直接改数据不就好了。</p>
+<p><img src="https://s2.loli.net/2023/02/20/rauZ5ThA4D7EpfG.png" alt="D4Q.png"></p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h2 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h2><p>根据提示去搜了一下tupper，发现了那个可以是自身的函数，且需要很长的k，猜测k就是验证码接起来抄个脚本跑了一下（k是自己手动输的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Tupper_self_referential_formula</span>(<span class="params">k</span>):</span></span><br><span class="line">    aa = np.zeros((<span class="number">17</span>, <span class="number">106</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x, y</span>):</span></span><br><span class="line">        y += k</span><br><span class="line">        a1 = <span class="number">2</span> ** -(-<span class="number">17</span> * x - y % <span class="number">17</span>)</span><br><span class="line">        a2 = (y // <span class="number">17</span>) // a1</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> a2 % <span class="number">2</span> &gt; <span class="number">0.5</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">17</span>):</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">106</span>):</span><br><span class="line">            aa[y, x] = f(x, y)</span><br><span class="line">    <span class="keyword">return</span> aa[:, ::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">k =<span class="number">1594199391770250354455183081054802631580554590456781276981302978243348088576774816981145460077422136047780972200375212293357383685099969525103172039042888918139627966684645793042724447954308373948403404873262837470923601139156304668538304057819343713500158029312192443296076902692735780417298059011568971988619463802818660736654049870484193411780158317168232187100668526865378478661078082009408188033574841574337151898932291631715135266804518790328831268881702387643369637508117317249879868707531954723945940226278368605203277838681081840279552</span>   <span class="comment"># 输入你要提取的k</span></span><br><span class="line">aa = Tupper_self_referential_formula(k)</span><br><span class="line">plt.figure(figsize=(<span class="number">15</span>, <span class="number">10</span>))</span><br><span class="line">plt.imshow(aa, origin=<span class="string">&#x27;lower&#x27;</span>)</span><br><span class="line">plt.savefig(<span class="string">&quot;tupper.png&quot;</span>)</span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;tupper.png&#x27;</span>)</span><br><span class="line"><span class="comment"># 翻转</span></span><br><span class="line">dst1 = img.transpose(Image.FLIP_LEFT_RIGHT).rotate(<span class="number">180</span>)</span><br><span class="line">plt.imshow(dst1)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Snake-on-web"><a href="#Snake-on-web" class="headerlink" title="Snake on web"></a>Snake on web</h2><p>很喜欢（尖叫）（扭曲）（阴暗的爬行） （爬行）（扭动）（阴暗地蠕动）（翻滚）（激烈地爬动）（扭曲）</p>
+<p>试了一下发现撞墙不会死，那难度很低，但是还是尝试了一下写控制键盘的脚本，没用上，手动打通了。</p>
+<p><img src="https://s2.loli.net/2023/02/18/wZtu87aF3N6WEOk.png" alt="6D.png"></p>
+<h2 id="你看这个指针它可爱吗"><a href="#你看这个指针它可爱吗" class="headerlink" title="你看这个指针它可爱吗"></a>你看这个指针它可爱吗</h2><p>​        很喜欢这题，出题人的github头像，可爱捏</p>
+<p>​        因为起手就提示了插入信息全是会在图像里，先打开比较明显的.ani .cur，用鼠标指针编辑工具打开可以很明显的看到多帧里左上角插了字符，也查到了ani结构的播放顺序和文件内seq端有关系，卡了很久的地方是，编辑工具提取出来的帧，和实际上的顺序不一样，后面发现了就对的上了。</p>
+<p>​        提示给出了出题人的b站文章，里面的脚本可以把ani转gif，用stegsolve可以查看到底第几帧，手动对一下可以按顺序拼出前半flag。</p>
+<p>​        flag{1513c121-8874-46b7-</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> io,os,sys</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(<span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s&#x27;</span>,level=logging.INFO)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analyzeANIFile</span>(<span class="params">filePath</span>):</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filePath,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">if</span> f.read(<span class="number">4</span>) != <span class="string">b&#x27;RIFF&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:-<span class="number">1</span>,<span class="string">&quot;msg&quot;</span>:<span class="string">&quot;File is not a ANI File!&quot;</span>&#125;</span><br><span class="line">        logging.debug(<span class="string">&#x27;文件头检查完成！&#x27;</span>)</span><br><span class="line">        fileSize = <span class="built_in">int</span>.from_bytes(f.read(<span class="number">4</span>), byteorder=<span class="string">&#x27;little&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line">        <span class="comment"># if os.path.getsize(filePath) != fileSize:</span></span><br><span class="line">        <span class="comment">#     return &#123;&quot;code&quot;:-2,&quot;msg&quot;:&quot;File is damaged!&quot;&#125;</span></span><br><span class="line">        logging.debug(<span class="string">&#x27;文件长度检查完成！&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> f.read(<span class="number">4</span>) != <span class="string">b&#x27;ACON&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:-<span class="number">1</span>,<span class="string">&quot;msg&quot;</span>:<span class="string">&quot;File is not a ANI File!&quot;</span>&#125;</span><br><span class="line">        logging.debug(<span class="string">&#x27;魔数检查完成！&#x27;</span>)</span><br><span class="line">        frameRate = (<span class="number">1</span>/<span class="number">60</span>)*<span class="number">1000</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">            chunkName = f.read(<span class="number">4</span>)</span><br><span class="line">            <span class="keyword">if</span> chunkName == <span class="string">b&#x27;LIST&#x27;</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            chunkSize = <span class="built_in">int</span>.from_bytes(f.read(<span class="number">4</span>), byteorder=<span class="string">&#x27;little&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line">            <span class="keyword">if</span> chunkName.lower() == <span class="string">b&#x27;rate&#x27;</span>:</span><br><span class="line">                logging.debug(<span class="string">&#x27;发现自定义速率！&#x27;</span>)</span><br><span class="line">                frameRate = frameRate * <span class="built_in">int</span>.from_bytes(f.read(<span class="number">4</span>), byteorder=<span class="string">&#x27;little&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line">                logging.warning(<span class="string">&#x27;发现自定义速率！由于GIF限制，将取第一帧与第二帧的速率作为整体速率！&#x27;</span>)</span><br><span class="line">                f.read(chunkSize - <span class="number">4</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logging.debug(<span class="string">&#x27;发现自定义Chunk！&#x27;</span>)</span><br><span class="line">                f.read(chunkSize)</span><br><span class="line">        listChunkSize = <span class="built_in">int</span>.from_bytes(f.read(<span class="number">4</span>), byteorder=<span class="string">&#x27;little&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">if</span> f.read(<span class="number">4</span>) != <span class="string">b&#x27;fram&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:-<span class="number">3</span>,<span class="string">&quot;msg&quot;</span>:<span class="string">&quot;File not a ANI File!(No Frames)&quot;</span>&#125;</span><br><span class="line">        logging.debug(<span class="string">&#x27;frame头检查完成！&#x27;</span>)</span><br><span class="line">        frameList = []</span><br><span class="line">        nowSize = <span class="number">4</span></span><br><span class="line">        <span class="keyword">while</span>(nowSize &lt; listChunkSize):</span><br><span class="line">            <span class="keyword">if</span> f.read(<span class="number">4</span>) != <span class="string">b&#x27;icon&#x27;</span>:</span><br><span class="line">                <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:-<span class="number">4</span>,<span class="string">&quot;msg&quot;</span>:<span class="string">&quot;File not a ANI File!(Other Kind Frames)&quot;</span>&#125;</span><br><span class="line">            nowSize += <span class="number">4</span></span><br><span class="line">            subChunkSize = <span class="built_in">int</span>.from_bytes(f.read(<span class="number">4</span>), byteorder=<span class="string">&#x27;little&#x27;</span>, signed=<span class="literal">False</span>)</span><br><span class="line">            nowSize += <span class="number">4</span></span><br><span class="line">            frameList.append(f.read(subChunkSize))</span><br><span class="line">            nowSize += subChunkSize</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:<span class="number">0</span>,<span class="string">&quot;msg&quot;</span>:frameList,<span class="string">&quot;frameRate&quot;</span>:frameRate&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        logging.fatal(<span class="string">&quot;Usage:python ani2gif.py &lt;inputFile&gt; &lt;outputFile,Option&gt;&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res = analyzeANIFile(sys.argv[<span class="number">1</span>])</span><br><span class="line">        GIFframes = []</span><br><span class="line">        <span class="keyword">if</span> res[<span class="string">&quot;code&quot;</span>] == <span class="number">0</span>:</span><br><span class="line">            logging.info(<span class="string">&#x27;ANI文件分析完成，帧提取完成！&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> frame <span class="keyword">in</span> res[<span class="string">&quot;msg&quot;</span>]:</span><br><span class="line">                frameImage = Image.<span class="built_in">open</span>(io.BytesIO(frame),formats=[<span class="string">&#x27;CUR&#x27;</span>]).convert(<span class="string">&#x27;RGBA&#x27;</span>)</span><br><span class="line">                GIFframes.append(frameImage)</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">len</span>(sys.argv) &gt;= <span class="number">3</span>):</span><br><span class="line">                GIFframes[<span class="number">0</span>].save(sys.argv[<span class="number">2</span>],<span class="built_in">format</span>=<span class="string">&quot;GIF&quot;</span>,save_all=<span class="literal">True</span>, append_images=GIFframes[<span class="number">1</span>:], optimize=<span class="literal">False</span>, duration=res[<span class="string">&quot;frameRate&quot;</span>], loop=<span class="number">0</span>, transparency=<span class="number">0</span>, disposal=<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                GIFframes[<span class="number">0</span>].save(<span class="string">f&quot;<span class="subst">&#123;sys.argv[<span class="number">1</span>].strip(<span class="string">&#x27;.ani&#x27;</span>)&#125;</span>.gif&quot;</span>,<span class="built_in">format</span>=<span class="string">&quot;GIF&quot;</span>,save_all=<span class="literal">True</span>, append_images=GIFframes[<span class="number">1</span>:], optimize=<span class="literal">False</span>, duration=res[<span class="string">&quot;frameRate&quot;</span>], loop=<span class="number">0</span>, transparency=<span class="number">0</span>, disposal=<span class="number">2</span>)</span><br><span class="line">            logging.info(<span class="string">&#x27;GIF生成完成！&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logging.fatal(res[<span class="string">&quot;msg&quot;</span>]) <span class="comment">#作者：汪汪的小蓝蓝 https://www.bilibili.com/read/cv20591812 出处：bilibili</span></span><br></pre></td></tr></table></figure>
+
+<p>后面和出题人确认了一下，插入的信息确实都是RGBA(255,255,255,255),那继续找图像</p>
+<p>发现macOS的文件夹里的东西cape文件格式在文章中被提到，且直接写了base64解码中间的data可以被转成tiff图片，很费眼睛的拼出后半flag。</p>
+<p><img src="https://s2.loli.net/2023/02/18/ZESVQDt93XLCylu.png" alt="IH.png"></p>
+<p>flag{1513c121-8874-46b7-8df7-b89f4760d810}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/20/2023VNCTF%E9%83%A8%E5%88%86wp/" data-id="clebu90bm0004jkw15ky34g3x" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wp/" rel="tag">wp</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2023/01/30/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E4%BA%86%E8%A7%A3Reverse/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">从0开始了解Reverse-1</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>塔纳利斯之沙 &copy; 2023</li>
+      
+        <li>ZHWANGART</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="塔纳利斯之沙"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
